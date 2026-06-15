@@ -1,1 +1,227 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-red: #b83218;
+  --color-brand-red-dark: #a02b14;
+  --color-brand-red-darker: #7f2210;
+
+  --color-ink-900: #0c0d0e;
+  --color-ink-800: #1c1f22;
+  --color-ink-700: #2a2e33;
+
+  --color-mist-600: #565d65;
+  --color-mist-100: #e7eaed;
+  --color-mist-50: #f3f5f6;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink-900);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Scroll reveal animation                                            */
+/* ---------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 700ms ease-out, transform 700ms ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------- */
+/* Sticky navigation                                                  */
+/* ---------------------------------------------------------------- */
+
+#site-nav {
+  transition: background-color 300ms ease, box-shadow 300ms ease, padding 300ms ease;
+}
+
+#site-nav.is-scrolled {
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 12px rgba(12, 13, 14, 0.08);
+}
+
+#site-nav .nav-logo-dark {
+  display: none;
+}
+
+#site-nav.is-scrolled .nav-logo-light {
+  display: none;
+}
+
+#site-nav.is-scrolled .nav-logo-dark {
+  display: block;
+}
+
+#site-nav .nav-link,
+#site-nav .menu-toggle {
+  color: var(--color-mist-50);
+  transition: color 300ms ease;
+}
+
+#site-nav.is-scrolled .nav-link,
+#site-nav.is-scrolled .menu-toggle {
+  color: var(--color-ink-900);
+}
+
+#site-nav .nav-inner {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  transition: padding 300ms ease;
+}
+
+#site-nav.is-scrolled .nav-inner {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
+
+/* ---------------------------------------------------------------- */
+/* Buttons                                                            */
+/* ---------------------------------------------------------------- */
+
+.btn-primary {
+  position: relative;
+  background-color: var(--color-brand-red);
+  color: var(--color-mist-50);
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-brand-red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(184, 50, 24, 0.65), 0 4px 10px rgba(12, 13, 14, 0.15);
+}
+
+.btn-secondary {
+  position: relative;
+  background-color: transparent;
+  color: var(--color-ink-900);
+  border: 1px solid var(--color-mist-100);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-brand-red);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(184, 50, 24, 0.35);
+}
+
+/* ---------------------------------------------------------------- */
+/* Service banner marquee                                             */
+/* ---------------------------------------------------------------- */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------------------------------------------------------------- */
+/* Service wheel                                                      */
+/* ---------------------------------------------------------------- */
+
+.service-wheel {
+  animation: spin-slow 60s linear infinite;
+}
+
+.service-wheel-icon-inner {
+  animation: spin-slow-reverse 60s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .service-wheel,
+  .service-wheel-icon-inner {
+    animation: none;
+  }
+
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Cards                                                              */
+/* ---------------------------------------------------------------- */
+
+.value-card,
+.team-card {
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.value-card:hover,
+.team-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 20px 40px -20px rgba(12, 13, 14, 0.25);
+}
+
+.team-card:hover .team-card-image img {
+  transform: scale(1.05);
+}
+
+.team-card-image img {
+  transition: transform 500ms ease;
+}
+
+.service-icon-card {
+  transition: transform 250ms ease;
+}
+
+.service-icon-card:hover {
+  transform: scale(1.08);
+}
+
+.service-icon-card:hover .service-icon-circle {
+  border-color: var(--color-brand-red);
+  background-color: var(--color-brand-red);
+  color: var(--color-mist-50);
+}
+
+.service-icon-circle {
+  transition: background-color 250ms ease, border-color 250ms ease, color 250ms ease;
+}
