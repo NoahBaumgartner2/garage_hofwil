@@ -21,9 +21,9 @@
     "ghcr.io/rails/devcontainer/features/postgres-client": {}
   },
 
-  "forwardPorts": [3002],
+  "forwardPorts": [3000],
   "portsAttributes": {
-    "3002": {
+    "3000": {
       "label": "Rails (garage_hofwil)",
       "onAutoForward": "openBrowser"
     }
