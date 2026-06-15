@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="de-CH">
   <head>
-    <title>GarageHofwil</title>
+    <title>Garage Hofwil AG &mdash; Der Mechaniker Ihres Vertrauens</title>
+    <meta name="description" content="Garage Hofwil AG in Münchenbuchsee: seit über 25 Jahren Ihr Partner für Service, Reparatur, Diagnose und MFK aller Fahrzeugmarken.">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="font-sans text-ink-900 antialiased">
+    <%= yield %>
   </body>
 </html>
