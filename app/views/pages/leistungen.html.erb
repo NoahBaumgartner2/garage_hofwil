@@ -1,0 +1,342 @@
+<%
+  # ── Primary featured service cards ────────────────────────────────
+  primary_cards = [
+    {
+      icon:     "check",
+      title:    "Service",
+      lines:    ["Kleinservice ab CHF 200.–", "Grossservice ab CHF 400.–"],
+      duration: "ca. 60–120 Min",
+    },
+    {
+      icon:     "aufhaengung",
+      title:    "Radwechsel",
+      lines:    ["Kompletträder CHF 50.–", "Nur Pneus CHF 132.–"],
+      duration: "ca. 30–60 Min",
+    },
+    {
+      icon:     "mfk",
+      title:    "MFK",
+      lines:    ["MFK & Fahrzeugvorführung"],
+      duration: "ca. 60–120 Min",
+    },
+    {
+      icon:     "wrench",
+      title:    "Reparatur",
+      lines:    ["Reparaturen für alle Marken"],
+      duration: "ca. 60–120 Min / individuell nach Aufwand",
+    },
+  ]
+
+  # ── Secondary service grid (no Service / Radwechsel duplicates) ───
+  secondary_services = [
+    {
+      name:      "bremsen",
+      title:     "Bremsen &amp; Fahrwerk",
+      text:      "Bremsbeläge, Bremsscheiben, Stossdämpfer, Spurstangen und mehr – für sichere Fahreigenschaften auf jeder Strasse.",
+      highlight: false,
+    },
+    {
+      name:      "wrench",
+      title:     "Motor &amp; Antrieb",
+      text:      "Motorendiagnose, Reparaturen, Zahnriemen, Kupplungen und alle Antriebsstrangarbeiten für alle Fahrzeugmarken.",
+      highlight: false,
+    },
+    {
+      name:      "elektronik",
+      title:     "Elektronik &amp; Diagnose",
+      text:      "Fahrzeugelektronik, Steuergerätediagnose, Sensoren und elektrische Systeme – auch dort, wo andere Garagen passen.",
+      highlight: true,
+      badge:     "Auch Elektrik!",
+    },
+    {
+      name:      "mfk",
+      title:     "MFK-Vorbereitung",
+      text:      "Wir prüfen Ihr Fahrzeug vor der Motorfahrzeugkontrolle und beheben festgestellte Mängel, damit die MFK problemlos verläuft.",
+      highlight: false,
+    },
+    {
+      name:      "check",
+      title:     "Wartung &amp; Inspektion",
+      text:      "Ölwechsel, Filterwechsel, Inspektion und alle Servicearbeiten nach Herstellervorgaben – pünktlich und zuverlässig.",
+      highlight: false,
+    },
+    {
+      name:      "snowflake",
+      title:     "Klimaanlage &amp; KlimaService",
+      text:      "Klimaanlagenwartung, Kältemittelauffüllung und Systemprüfung – für angenehme Temperaturen im Fahrzeuginnenraum.",
+      highlight: false,
+    },
+    {
+      name:      "turbine",
+      title:     "Turbo &amp; Aufladung",
+      text:      "Turboladerdiagnose und -reparatur, Ladedrucksysteme und alle Arbeiten rund um die Motoraufladung.",
+      highlight: false,
+    },
+  ]
+
+  # ── Andere Services price accordion ───────────────────────────────
+  andere_services = [
+    { category: "Batterie", items: [
+      { name: "Batterie laden",    price: "ab Fr. 25.–" },
+      { name: "Batterie wechseln", price: "ab Fr. 37.–" },
+    ]},
+    { category: "MFK &amp; Abgas", items: [
+      { name: "MFK-Test ohne Reparaturen", price: "ab Fr. 197.–" },
+      { name: "Abgastest Benzin",          price: "ab Fr. 73.–"  },
+      { name: "Abgastest Diesel",          price: "ab Fr. 103.–" },
+    ]},
+    { category: "Service &amp; Wartung", items: [
+      { name: "Öl- und Filterwechsel",                     price: "ab Fr. 69.–"            },
+      { name: "Kleiner Service",                           price: "ab Fr. 139.– + Material" },
+      { name: "Kleiner Service Transporter / Lieferwagen", price: "ab Fr. 159.– + Material" },
+      { name: "Ferien-Check",                              price: "ab Fr. 49.–"            },
+    ]},
+    { category: "Reinigung &amp; Sonstiges", items: [
+      { name: "Motor waschen",              price: "ab Fr. 98.–"  },
+      { name: "Motor- und Chassis reinigen",price: "ab Fr. 148.–" },
+      { name: "Spur einstellen",            price: "ab Fr. 98.–"  },
+      { name: "Licht einstellen",           price: "ab Fr. 25.–"  },
+      { name: "Bremsprüfstand",             price: "ab Fr. 20.–"  },
+      { name: "Lenkgeometrie",              price: "ab Fr. 195.–" },
+      { name: "Lenkgeometrie Lieferwagen",  price: "ab Fr. 239.–" },
+      { name: "Ersatzwagen",                price: "ab Fr. 45.– / Tag" },
+    ]},
+    { category: "Räder &amp; Reifen", items: [
+      { name: "Komplettrad bis 18 Zoll",       price: "ab Fr. 50.–"  },
+      { name: "Komplettrad bis 22 Zoll",       price: "ab Fr. 70.–"  },
+      { name: "4 Radwechsel ohne Auswuchten",  price: "ab Fr. 120.–" },
+      { name: "4 Radwechsel + 4 Auswuchten",  price: "ab Fr. 150.–" },
+      { name: "Pneu-Reparatur ohne Demontage", price: "ab Fr. 35.–"  },
+      { name: "TL-Ventile",                    price: "ab Fr. 4.–"   },
+    ]},
+    { category: "Klimaanlage", items: [
+      { name: "KlimaService", price: "ab Fr. 145.– + Gas" },
+    ]},
+    { category: "Flüssigkeiten (pro Liter)", items: [
+      { name: "Castrol 5W30",     price: "ab Fr. 29.–"  },
+      { name: "Castrol 5W40",     price: "ab Fr. 24.–"  },
+      { name: "Frostschutz",      price: "ab Fr. 12.90" },
+      { name: "Bremsflüssigkeit", price: "ab Fr. 34.–"  },
+    ]},
+  ]
+%>
+
+<main>
+
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <%# 1. HERO – mechanic image background                              %>
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <section class="relative min-h-[44vh] flex items-center justify-center text-center px-6 bg-ink-900 bg-cover bg-center"
+           style="background-image: url('<%= asset_path("team/mechaniker-1.jpg") %>');">
+
+    <%# Layered dark overlay for readability %>
+    <div class="absolute inset-0"
+         style="background: linear-gradient(180deg,
+           rgba(10,11,13,0.80) 0%,
+           rgba(10,11,13,0.55) 45%,
+           rgba(10,11,13,0.80) 100%);"></div>
+
+    <div class="relative z-10 max-w-2xl mx-auto pt-20 pb-8">
+      <p class="reveal font-heading text-sm font-semibold uppercase tracking-wider text-brand-red mb-4"
+         data-controller="reveal">Was wir für Sie tun</p>
+
+      <h1 class="reveal font-heading text-3xl md:text-5xl font-semibold text-white leading-tight"
+          data-controller="reveal" data-reveal-delay="80">
+        Unsere Leistungen
+      </h1>
+
+      <p class="reveal mt-4 text-white/80 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+         data-controller="reveal" data-reveal-delay="160">
+        Von der einfachen Wartung bis zur komplexen Elektronikdiagnose &ndash; Garage Hofwil macht, was andere nicht können.
+      </p>
+
+      <div class="reveal mt-7" data-controller="reveal" data-reveal-delay="240">
+        <a href="/kontakt"
+           class="btn-primary btn-glow inline-flex items-center justify-center rounded-full px-8 py-4 font-heading text-base font-semibold">
+          Termin buchen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <%# 2. FAHRZEUGÜBERGABE – contained card                             %>
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <section class="bg-white px-6 pt-8 pb-0">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="handover-card">
+        <h2 class="font-heading text-xl md:text-2xl font-semibold text-amber-900">
+          Fahrzeug abgeben &ndash; wann es für Sie passt
+        </h2>
+        <p class="mt-3 text-amber-800/80 text-base leading-relaxed max-w-2xl">
+          Bringen Sie Ihr Auto am Morgen vorbei und werfen Sie den Schlüssel in unsere sichere Schlüsselbox. Wir erledigen den Service und Sie holen das Fahrzeug am Abend wieder ab.
+        </p>
+        <div class="mt-4">
+          <span class="handover-check">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Kein Warten &ndash; maximal bequem
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <%# 3. PRIMARY 4 SERVICE CARDS                                        %>
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <section class="bg-white px-6 pt-8 pb-14 lg:pb-16 dm-light-2">
+    <div class="max-w-[1200px] mx-auto">
+
+      <div class="reveal max-w-2xl mb-10" data-controller="reveal">
+        <h2 class="font-heading text-3xl md:text-4xl font-semibold text-ink-900">Unsere Hauptleistungen</h2>
+        <p class="mt-3 text-mist-600 text-lg">Klare Leistungen, klare Preise &ndash; ohne versteckte Kosten.</p>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <% primary_cards.each_with_index do |card, i| %>
+          <div class="primary-service-card reveal" data-controller="reveal" data-reveal-delay="<%= i * 70 %>">
+
+            <%# Icon %>
+            <div class="w-12 h-12 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center mb-5 shrink-0">
+              <%= render "pages/icon", name: card[:icon], css_class: "w-6 h-6" %>
+            </div>
+
+            <%# Title %>
+            <h3 class="font-heading text-xl font-semibold text-ink-900 mb-4"><%= card[:title] %></h3>
+
+            <%# Price lines – flex-grow to push duration + button to bottom %>
+            <div class="card-grow">
+              <% card[:lines].each do |line| %>
+                <p class="price-line text-ink-900 font-medium text-sm leading-relaxed"><%= line %></p>
+              <% end %>
+            </div>
+
+            <%# Duration %>
+            <div class="flex items-center gap-1.5 mt-5 mb-5">
+              <%= render "pages/icon", name: "clock", css_class: "w-3.5 h-3.5 text-mist-600 shrink-0" %>
+              <span class="duration-label text-xs text-mist-600 font-heading"><%= card[:duration] %></span>
+            </div>
+
+            <%# CTA %>
+            <a href="/kontakt"
+               class="btn-primary w-full inline-flex items-center justify-center rounded-full px-5 py-3 font-heading text-sm font-semibold mt-auto">
+              Termin buchen
+            </a>
+
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <%# 4. SECONDARY SERVICE GRID (no Service / Radwechsel duplicates)   %>
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <section class="bg-mist-50 px-6 py-16 lg:py-20 dm-light-1">
+    <div class="max-w-[1200px] mx-auto">
+
+      <div class="reveal max-w-2xl mb-10" data-controller="reveal">
+        <h2 class="font-heading text-3xl md:text-4xl font-semibold text-ink-900">Mechanik und Elektronik &ndash; alles aus einer Hand</h2>
+        <p class="mt-3 text-mist-600 text-lg">
+          Viele Garagen lehnen Elektrikprobleme ab. Wir nicht. Garage Hofwil beherrscht sowohl klassische Mechanik als auch moderne Fahrzeugelektronik.
+        </p>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <% secondary_services.each_with_index do |svc, i| %>
+          <div class="service-card reveal <%= 'service-card-highlight' if svc[:highlight] %>"
+               data-controller="reveal" data-reveal-delay="<%= i * 55 %>">
+
+            <% if svc[:highlight] %>
+              <div class="inline-flex items-center gap-1.5 bg-brand-red text-white font-heading text-xs font-semibold px-2.5 py-1 rounded-full mb-4">
+                <%= render "pages/icon", name: "elektronik", css_class: "w-3.5 h-3.5" %>
+                <%= svc[:badge] %>
+              </div>
+            <% end %>
+
+            <div class="w-11 h-11 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center mb-5">
+              <%= render "pages/icon", name: svc[:name], css_class: "w-5 h-5" %>
+            </div>
+
+            <h3 class="font-heading text-lg font-semibold text-ink-900"><%= raw svc[:title] %></h3>
+            <p class="mt-2 text-mist-600 text-sm leading-relaxed"><%= svc[:text] %></p>
+
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <%# 5. NOTFALL / PANNE – prominent red banner                         %>
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <section class="notfall-banner px-6 py-16">
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="flex items-center gap-5">
+        <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+          <%= render "pages/icon", name: "alert-triangle", css_class: "w-8 h-8 text-white" %>
+        </div>
+        <div>
+          <h2 class="font-heading text-2xl md:text-3xl font-semibold text-white">Notfall / Panne</h2>
+          <p class="text-white/85 mt-1 text-lg">Schnelle Hilfe bei Problemen.</p>
+        </div>
+      </div>
+      <a href="tel:+41318690000"
+         class="btn-white shrink-0 inline-flex items-center gap-2.5 rounded-full px-8 py-4 text-base font-heading font-semibold">
+        <%= render "pages/icon", name: "phone", css_class: "w-5 h-5" %>
+        Jetzt anrufen
+      </a>
+    </div>
+  </section>
+
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <%# 6. ANDERE SERVICES & PREISLISTE (Hinweis first, then accordion)  %>
+  <%# ──────────────────────────────────────────────────────────────── %>
+  <section class="bg-white px-6 py-16 lg:py-20 dm-light-2">
+    <div class="max-w-[1200px] mx-auto">
+
+      <%# Heading %>
+      <div class="reveal max-w-2xl" data-controller="reveal">
+        <h2 class="font-heading text-3xl md:text-4xl font-semibold text-ink-900">Andere Services &amp; Preisliste</h2>
+      </div>
+
+      <%# Hinweis immediately below heading – BEFORE accordion %>
+      <div class="reveal mt-5 rounded-xl bg-mist-50 border border-mist-100 p-5 text-sm text-mist-600 max-w-3xl"
+           data-controller="reveal" data-reveal-delay="60">
+        <strong class="text-ink-900 font-semibold">Hinweis:</strong>
+        Alle Preise verstehen sich als Richtpreise ab Preis. Je nach Fahrzeugmodell, Aufwand und benötigtem Material können die Kosten abweichen. Servicegebühren und Material sind nicht immer enthalten. Für eine genaue Einschätzung kontaktieren Sie uns bitte direkt.
+      </div>
+
+      <%# Accordion categories %>
+      <div class="mt-8 space-y-3 reveal" data-controller="reveal" data-reveal-delay="120">
+        <% andere_services.each do |cat| %>
+          <details class="accordion-details">
+            <summary class="accordion-summary">
+              <span><%= raw cat[:category] %></span>
+              <%= render "pages/icon", name: "chevron-down", css_class: "w-5 h-5 accordion-chevron" %>
+            </summary>
+            <div class="accordion-body">
+              <div class="divide-y divide-mist-100">
+                <% cat[:items].each do |item| %>
+                  <div class="price-row flex items-center justify-between py-3">
+                    <span class="text-mist-600 text-sm"><%= raw item[:name] %></span>
+                    <strong class="font-heading text-sm font-semibold text-ink-900 whitespace-nowrap ml-4"><%= item[:price] %></strong>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </details>
+        <% end %>
+      </div>
+
+      <div class="mt-8 reveal" data-controller="reveal" data-reveal-delay="180">
+        <a href="/kontakt"
+           class="btn-primary inline-flex items-center rounded-full px-8 py-4 font-heading text-base font-semibold">
+          Gratis Fahrzeug Check buchen
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>

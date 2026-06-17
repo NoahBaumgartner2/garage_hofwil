@@ -1,111 +1,67 @@
 <%
-  service_terms = ["Service", "Diagnose", "Bremsen", "Elektronik", "Aufhängung", "Turbine", "Reifen", "MFK", "Wartung", "Fahrzeugcheck"]
+  service_terms = ["Service", "Diagnose", "Bremsen", "Elektronik", "Aufhängung", "Turbine", "Reifen", "MFK", "Wartung", "Fahrzeugcheck", "KlimaService", "Radwechsel"]
 
   values = [
-    { icon: "eye", title: "Transparenz", text: "Sie erhalten eine klare Offerte, bevor wir mit der Arbeit beginnen – keine versteckten Kosten, keine Überraschungen." },
-    { icon: "award", title: "Erfahrung", text: "Seit über 25 Jahren reparieren, warten und diagnostizieren wir Fahrzeuge aller Marken mit geschultem Fachwissen." },
-    { icon: "shield-check", title: "Qualität", text: "Wir arbeiten ausschliesslich nach Herstellervorgaben und mit geprüften Ersatzteilen." },
-    { icon: "headset", title: "Persönlicher Service", text: "Bei uns sprechen Sie direkt mit den Personen, die an Ihrem Fahrzeug arbeiten – persönlich und auf Augenhöhe." },
-    { icon: "clock", title: "Zuverlässigkeit", text: "Termine, die wir vereinbaren, halten wir ein. Ihr Fahrzeug ist bei uns in guten Händen." },
-    { icon: "scale", title: "Fairness", text: "Faire Preise und ehrliche Einschätzungen – auch wenn das bedeutet, von einer Reparatur abzuraten." },
+    { icon: "award",        title: "Erfahrung",        text: "Seit über 25 Jahren reparieren, warten und diagnostizieren wir Fahrzeuge aller Marken mit geschultem Fachwissen." },
+    { icon: "shield-check", title: "Qualität",          text: "Wir arbeiten ausschliesslich nach Herstellervorgaben und mit geprüften Ersatzteilen – für ein dauerhaftes Ergebnis." },
+    { icon: "clock",        title: "Zuverlässigkeit",   text: "Termine, die wir vereinbaren, halten wir ein. Ihr Fahrzeug ist pünktlich fertig." },
+    { icon: "scale",        title: "Fairness",          text: "Faire Preise und ehrliche Einschätzungen – auch wenn das bedeutet, von einer Reparatur abzuraten." },
   ]
 
   steps = [
-    { title: "Diagnose & Fahrzeugprüfung", text: "Wir prüfen Ihr Fahrzeug sorgfältig und identifizieren die Ursache des Problems." },
-    { title: "Transparente Offerte & Beratung", text: "Sie erhalten eine verständliche Offerte und entscheiden in Ruhe, wie es weitergeht." },
-    { title: "Reparatur nach Herstellervorgaben", text: "Unsere Mechaniker führen die Arbeiten fachgerecht und nach Herstellervorgaben aus." },
+    { title: "Diagnose &amp; Fahrzeugprüfung",       text: "Wir prüfen Ihr Fahrzeug sorgfältig und identifizieren die Ursache des Problems." },
+    { title: "Transparente Offerte &amp; Beratung", text: "Sie erhalten eine verständliche Offerte und entscheiden in Ruhe, wie es weitergeht – keine versteckten Kosten." },
+    { title: "Reparatur nach Herstellervorgaben",   text: "Unsere Mechaniker führen die Arbeiten fachgerecht aus und melden sich bei Ihnen, sobald das Fahrzeug bereit ist." },
   ]
 
+  # 7 icons evenly distributed on a circle (radius 43.75%, starting at top)
   wheel_icons = [
-    { name: "bremsen",     label: "Bremsen",     top: 6.25,  left: 50 },
-    { name: "aufhaengung", label: "Aufhängung",  top: 28.125, left: 87.875 },
-    { name: "turbine",     label: "Turbine",     top: 71.875, left: 87.875 },
-    { name: "riemen",      label: "Riemen",      top: 93.75, left: 50 },
-    { name: "check",       label: "Check",       top: 71.875, left: 12.125 },
-    { name: "elektronik",  label: "Elektronik",  top: 28.125, left: 12.125 },
-  ]
-
-  team = [
-    { image: "team/mechaniker-1.jpg", name: "Marco Steiner", role: "Geschäftsführer & Werkstattleiter" },
-    { image: "team/mechaniker-2.jpg", name: "Daniel Brunner", role: "Diagnosetechniker" },
-    { image: "team/mechaniker-3.jpg", name: "Stefan Moser", role: "Kfz-Mechatroniker" },
+    { name: "bremsen",     label: "Bremsen",    top:  6.25, left: 50.0 },
+    { name: "aufhaengung", label: "Aufhängung", top: 22.7,  left: 84.2 },
+    { name: "turbine",     label: "Turbine",    top: 59.7,  left: 92.7 },
+    { name: "riemen",      label: "Riemen",     top: 89.4,  left: 69.0 },
+    { name: "check",       label: "Check",      top: 89.4,  left: 31.0 },
+    { name: "elektronik",  label: "Elektronik", top: 59.7,  left:  7.3 },
+    { name: "mfk",         label: "MFK",        top: 22.7,  left: 15.8 },
   ]
 %>
-
-<header id="site-nav" data-controller="nav" class="fixed inset-x-0 top-0 z-50">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
-    <div class="nav-inner flex items-center justify-between">
-      <a href="#startseite" class="shrink-0">
-        <%= image_tag "logo/garage-hofwil-logo-weiss.png", alt: "Garage Hofwil AG", class: "h-9 w-auto nav-logo-light" %>
-        <%= image_tag "logo/garage-hofwil-logo.png", alt: "Garage Hofwil AG", class: "h-9 w-auto nav-logo-dark" %>
-      </a>
-
-      <nav class="hidden lg:flex items-center gap-8 font-heading text-sm font-medium" aria-label="Hauptnavigation">
-        <a href="#startseite" class="nav-link hover:text-brand-red transition-colors">Startseite</a>
-        <a href="#leistungen" class="nav-link hover:text-brand-red transition-colors">Leistungen</a>
-        <a href="#" class="nav-link hover:text-brand-red transition-colors">Kauf &amp; Verkauf</a>
-        <a href="#team" class="nav-link hover:text-brand-red transition-colors">Über Uns</a>
-        <a href="#kontakt" class="nav-link hover:text-brand-red transition-colors">Kontakt</a>
-      </nav>
-
-      <a href="#kontakt" class="btn-primary hidden lg:inline-flex items-center rounded-full px-6 py-2.5 font-heading text-sm font-semibold">
-        Termin buchen
-      </a>
-
-      <button type="button" data-action="nav#toggle" aria-label="Menü öffnen" class="menu-toggle lg:hidden">
-        <%= render "icon", name: "menu", css_class: "w-7 h-7" %>
-      </button>
-    </div>
-  </div>
-
-  <div data-nav-target="menu" class="hidden lg:hidden bg-white border-t border-mist-100 shadow-lg">
-    <nav class="flex flex-col px-6 py-6 gap-5 font-heading text-base font-medium text-ink-900" aria-label="Mobile Navigation">
-      <a href="#startseite" data-action="nav#close">Startseite</a>
-      <a href="#leistungen" data-action="nav#close">Leistungen</a>
-      <a href="#" data-action="nav#close">Kauf &amp; Verkauf</a>
-      <a href="#team" data-action="nav#close">Über Uns</a>
-      <a href="#kontakt" data-action="nav#close">Kontakt</a>
-      <a href="#kontakt" data-action="nav#close" class="btn-primary inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold">Termin buchen</a>
-    </nav>
-  </div>
-</header>
 
 <main>
   <%# ---------------------------------------------------------------- %>
   <%# Hero %>
   <%# ---------------------------------------------------------------- %>
   <section id="startseite" class="relative min-h-screen flex items-center justify-center text-center px-6 bg-ink-900 bg-cover bg-center" style="background-image: url('<%= asset_path("hero/werkstatt-diagnose.jpg") %>');">
-    <div class="absolute inset-0" style="background-image: radial-gradient(ellipse at center, rgba(12,13,14,0.55) 0%, rgba(12,13,14,0.2) 55%, rgba(12,13,14,0) 100%), linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(184,50,24,0.18) 100%);"></div>
+
+    <%# Strong layered overlay for readability %>
+    <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,11,13,0.82) 0%, rgba(10,11,13,0.60) 50%, rgba(10,11,13,0.80) 100%);"></div>
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center top, rgba(184,50,24,0.12) 0%, transparent 65%);"></div>
 
     <div class="relative z-10 max-w-3xl mx-auto pt-20">
-      <%= image_tag "logo/garage-hofwil-logo-weiss.png", alt: "Garage Hofwil AG", class: "h-12 md:h-16 mx-auto mb-8" %>
+      <%# Larger logo in hero %>
+      <%= image_tag "logo/garage-hofwil-logo-weiss.png", alt: "Garage Hofwil AG", class: "h-20 md:h-28 mx-auto mb-10 drop-shadow-2xl" %>
 
-      <h1 class="reveal font-heading text-4xl md:text-6xl font-semibold text-white" data-controller="reveal">
-        Der Mechaniker Ihres Vertrauens
+      <h1 class="reveal font-heading text-4xl md:text-6xl font-semibold text-white leading-tight" data-controller="reveal">
+        Ihr Mechaniker des Vertrauens<br class="hidden sm:block"> in der Region
       </h1>
 
-      <p class="reveal mt-6 text-lg md:text-xl text-mist-50/90" data-controller="reveal" data-reveal-delay="100">
-        Seit über 25 Jahren betreuen wir Fahrzeuge aller Marken &ndash; mit ehrlicher Beratung, transparenten Offerten und persönlichem Service in Münchenbuchsee.
+      <p class="reveal mt-6 text-lg md:text-xl text-white/85 max-w-2xl mx-auto" data-controller="reveal" data-reveal-delay="100">
+        Seit über 25 Jahren betreuen wir Fahrzeuge aller Marken &ndash; mit ehrlicher Beratung, klaren Offerten und persönlichem Service in Münchenbuchsee.
       </p>
 
-      <p class="reveal mt-4 text-base md:text-lg text-mist-50/80" data-controller="reveal" data-reveal-delay="200">
-        Lassen Sie Ihr Fahrzeug von unserem Team kostenlos prüfen &ndash; unverbindlich und ohne versteckte Kosten.
-      </p>
-
-      <div class="reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" data-controller="reveal" data-reveal-delay="300">
-        <a href="#kontakt" class="btn-primary inline-flex items-center justify-center rounded-full px-8 py-4 font-heading text-base font-semibold">
-          Gratis Diagnose buchen
+      <div class="reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" data-controller="reveal" data-reveal-delay="200">
+        <a href="/kontakt" class="btn-primary btn-glow inline-flex items-center justify-center rounded-full px-8 py-4 font-heading text-base font-semibold">
+          Gratis Fahrzeug Check
         </a>
-        <a href="#leistungen" class="inline-flex items-center gap-1 font-heading text-base font-medium text-white hover:text-brand-red transition-colors">
-          Mehr erfahren
-          <%= render "icon", name: "chevron-right", css_class: "w-4 h-4" %>
+        <a href="/leistungen" class="inline-flex items-center gap-1.5 font-heading text-base font-medium text-white/90 hover:text-white transition-colors">
+          Alle Leistungen
+          <%= render "pages/icon", name: "chevron-right", css_class: "w-4 h-4" %>
         </a>
       </div>
     </div>
   </section>
 
   <%# ---------------------------------------------------------------- %>
-  <%# Service Banner %>
+  <%# Service banner marquee %>
   <%# ---------------------------------------------------------------- %>
   <section class="bg-ink-900 py-6 overflow-hidden" aria-label="Unsere Leistungen im Überblick">
     <div class="marquee-track">
@@ -123,65 +79,17 @@
   </section>
 
   <%# ---------------------------------------------------------------- %>
-  <%# Werte / Qualitätssicherung %>
+  <%# Service wheel %>
   <%# ---------------------------------------------------------------- %>
-  <section id="werte" class="bg-mist-50 px-6 py-20 lg:py-[120px]">
-    <div class="max-w-[1200px] mx-auto">
-      <div class="reveal max-w-2xl" data-controller="reveal">
-        <h2 class="font-heading text-3xl md:text-4xl font-semibold">Worauf Sie bei uns zählen können</h2>
-        <p class="mt-4 text-mist-600 text-lg">Vertrauen entsteht durch Klarheit, Erfahrung und ehrliche Arbeit &ndash; das ist unser Anspruch an jeden Auftrag.</p>
-      </div>
-
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <% values.each_with_index do |value, i| %>
-          <div class="value-card reveal bg-white rounded-2xl p-8 shadow-sm" data-controller="reveal" data-reveal-delay="<%= i * 75 %>">
-            <div class="w-12 h-12 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center">
-              <%= render "icon", name: value[:icon], css_class: "w-6 h-6" %>
-            </div>
-            <h3 class="mt-6 font-heading text-xl font-semibold"><%= value[:title] %></h3>
-            <p class="mt-3 text-mist-600"><%= value[:text] %></p>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </section>
-
-  <%# ---------------------------------------------------------------- %>
-  <%# Terminablauf %>
-  <%# ---------------------------------------------------------------- %>
-  <section class="bg-white px-6 py-20 lg:py-[120px]">
-    <div class="max-w-[1200px] mx-auto">
-      <div class="reveal max-w-2xl mx-auto text-center" data-controller="reveal">
-        <h2 class="font-heading text-3xl md:text-4xl font-semibold">So läuft Ihr Termin ab</h2>
-        <p class="mt-4 text-mist-600 text-lg">Drei klare Schritte &ndash; ohne Unsicherheiten.</p>
-      </div>
-
-      <div class="mt-16 grid gap-12 lg:grid-cols-3 lg:gap-8 relative">
-        <div class="hidden lg:block absolute top-6 left-0 right-0 h-px bg-mist-100" aria-hidden="true"></div>
-        <% steps.each_with_index do |step, i| %>
-          <div class="reveal relative text-center lg:text-left" data-controller="reveal" data-reveal-delay="<%= i * 100 %>">
-            <div class="relative z-10 w-12 h-12 mx-auto lg:mx-0 rounded-full bg-brand-red text-mist-50 flex items-center justify-center font-heading text-lg font-semibold">
-              <%= i + 1 %>
-            </div>
-            <h3 class="mt-6 font-heading text-xl font-semibold"><%= step[:title] %></h3>
-            <p class="mt-3 text-mist-600"><%= step[:text] %></p>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </section>
-
-  <%# ---------------------------------------------------------------- %>
-  <%# Leistungen %>
-  <%# ---------------------------------------------------------------- %>
-  <section id="leistungen" class="bg-mist-50 px-6 py-20 lg:py-[120px] overflow-hidden">
+  <section class="bg-mist-50 px-6 py-20 lg:py-[120px] overflow-hidden dm-light-1">
     <div class="max-w-[1200px] mx-auto grid items-center gap-16 lg:grid-cols-2">
       <div class="reveal" data-controller="reveal">
-        <h2 class="font-heading text-3xl md:text-4xl font-semibold">Alles aus einer Hand &ndash; für jede Fahrzeugmarke</h2>
+        <p class="font-heading text-sm font-semibold uppercase tracking-wider text-brand-red mb-3">Unsere Kernleistungen</p>
+        <h2 class="font-heading text-3xl md:text-4xl font-semibold text-ink-900">Alles aus einer Hand &ndash; für jede Fahrzeugmarke</h2>
         <p class="mt-6 text-mist-600 text-lg">
-          Von der Diagnose über die Wartung bis zur Reparatur: Wir kümmern uns um Bremsen, Aufhängung, Elektronik und mehr &ndash; immer nach Herstellervorgaben, mit geprüften Ersatzteilen und transparenter Kommunikation.
+          Von der Diagnose über die Wartung bis zur Reparatur: Wir kümmern uns um Bremsen, Aufhängung, Elektronik, MFK-Vorbereitung und mehr &ndash; immer nach Herstellervorgaben.
         </p>
-        <a href="#" class="btn-primary mt-8 inline-flex items-center rounded-full px-8 py-4 font-heading text-base font-semibold">
+        <a href="/leistungen" class="btn-primary mt-8 inline-flex items-center rounded-full px-8 py-4 font-heading text-base font-semibold">
           Alle Leistungen ansehen
         </a>
       </div>
@@ -196,15 +104,16 @@
                 <div class="service-wheel-icon-inner">
                   <div class="service-icon-card flex flex-col items-center gap-2">
                     <div class="service-icon-circle w-14 h-14 md:w-16 md:h-16 rounded-full border border-mist-100 bg-white text-ink-900 flex items-center justify-center shadow-sm">
-                      <%= render "icon", name: icon[:name], css_class: "w-6 h-6 md:w-7 md:h-7" %>
+                      <%= render "pages/icon", name: icon[:name], css_class: "w-6 h-6 md:w-7 md:h-7" %>
                     </div>
-                    <span class="font-heading text-xs md:text-sm font-medium text-ink-900 bg-white/80 rounded px-1.5"><%= icon[:label] %></span>
+                    <span class="font-heading text-xs md:text-sm font-medium text-ink-900 bg-white/90 rounded px-1.5 whitespace-nowrap"><%= icon[:label] %></span>
                   </div>
                 </div>
               </div>
             <% end %>
           </div>
 
+          <%# Center logo %>
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-ink-900 flex items-center justify-center shadow-lg">
               <%= image_tag "logo/garage-hofwil-logo-weiss.png", alt: "", class: "w-12 md:w-14" %>
@@ -216,133 +125,106 @@
   </section>
 
   <%# ---------------------------------------------------------------- %>
-  <%# Team %>
+  <%# Why choose us – adaptive section (light/dark mode aware) %>
   <%# ---------------------------------------------------------------- %>
-  <section id="team" class="bg-white px-6 py-20 lg:py-[120px]">
+  <section id="werte" class="werte-section px-6 py-20 lg:py-[120px]">
     <div class="max-w-[1200px] mx-auto">
-      <div class="reveal max-w-2xl mx-auto text-center" data-controller="reveal">
-        <h2 class="font-heading text-3xl md:text-4xl font-semibold">Die Menschen hinter Garage Hofwil</h2>
-        <p class="mt-4 text-mist-600 text-lg">Erfahrene Mechaniker, die sich Zeit für Ihr Fahrzeug nehmen.</p>
+
+      <%# Two-column: image left, text right %>
+      <div class="grid gap-16 lg:grid-cols-2 items-center mb-16">
+
+        <%# Single main image with red accent %>
+        <div class="reveal relative" data-controller="reveal">
+          <%# Decorative red accent behind image %>
+          <div class="absolute -top-5 -left-5 w-24 h-24 bg-brand-red/12 rounded-2xl" aria-hidden="true"></div>
+
+          <%# Main image %>
+          <div class="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-xl">
+            <%= image_tag "team/mechaniker-1.jpg", alt: "Mechaniker bei der Arbeit in der Garage Hofwil", class: "w-full h-full object-cover" %>
+            <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(184,50,24,0.07) 0%, transparent 55%);"></div>
+            <%# Badge on the image %>
+            <div class="absolute bottom-4 left-4 bg-brand-red text-white font-heading text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
+              Über 25 Jahre Erfahrung
+            </div>
+          </div>
+        </div>
+
+        <%# Text content %>
+        <div class="reveal werte-text lg:pl-6" data-controller="reveal" data-reveal-delay="150">
+          <p class="font-heading text-sm font-semibold uppercase tracking-wider text-brand-red mb-4">Warum Garage Hofwil?</p>
+
+          <h2 class="font-heading text-3xl md:text-4xl font-semibold leading-tight">
+            Transparente Arbeit.<br>Schneller wieder unterwegs.
+          </h2>
+
+          <p class="mt-6 werte-para text-lg leading-relaxed">
+            Bei Garage Hofwil erklären wir jede Arbeit klar und verständlich, bevor wir beginnen.
+            <strong class="werte-strong">Transparenz</strong> bedeutet für uns: klare Offerten, ehrliche Einschätzungen und keine versteckten Kosten &ndash; egal wie gross oder klein der Auftrag.
+          </p>
+
+          <p class="mt-4 werte-para text-lg leading-relaxed">
+            Wir verstehen, dass Sie Ihr Fahrzeug täglich brauchen. Deshalb steht
+            <strong class="werte-strong">Geschwindigkeit</strong> bei uns an erster Stelle: effiziente Arbeit, kurze Wartezeiten und zuverlässige Terminplanung &ndash; damit Sie schnell wieder unterwegs sind.
+          </p>
+
+          <a href="/kontakt" class="btn-primary mt-8 inline-flex items-center rounded-full px-8 py-4 font-heading text-base font-semibold">
+            Gratis Fahrzeug Check buchen
+          </a>
+        </div>
       </div>
 
-      <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-2xl lg:max-w-none mx-auto">
-        <% team.each_with_index do |member, i| %>
-          <div class="team-card reveal" data-controller="reveal" data-reveal-delay="<%= i * 100 %>">
-            <div class="team-card-image overflow-hidden rounded-2xl aspect-[4/5]">
-              <%= image_tag member[:image], alt: member[:name], class: "w-full h-full object-cover" %>
+      <%# Value cards row %>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <% values.each_with_index do |value, i| %>
+          <div class="value-card-dark reveal rounded-2xl p-7" data-controller="reveal" data-reveal-delay="<%= i * 75 %>">
+            <div class="w-11 h-11 rounded-full bg-brand-red/12 text-brand-red flex items-center justify-center">
+              <%= render "pages/icon", name: value[:icon], css_class: "w-5 h-5" %>
             </div>
-            <h3 class="mt-4 font-heading text-lg font-semibold"><%= member[:name] %></h3>
-            <p class="text-mist-600"><%= member[:role] %></p>
+            <h3 class="mt-5 font-heading text-lg font-semibold"><%= value[:title] %></h3>
+            <p class="mt-2 text-sm leading-relaxed"><%= value[:text] %></p>
           </div>
         <% end %>
       </div>
+    </div>
+  </section>
 
-      <div class="reveal mt-12 text-center" data-controller="reveal">
-        <a href="#" class="btn-secondary inline-flex items-center rounded-full px-8 py-4 font-heading text-base font-semibold">Mehr über uns</a>
+  <%# ---------------------------------------------------------------- %>
+  <%# Process steps %>
+  <%# ---------------------------------------------------------------- %>
+  <section class="bg-white px-6 py-20 lg:py-[120px] dm-light-2">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="reveal max-w-2xl mx-auto text-center" data-controller="reveal">
+        <h2 class="font-heading text-3xl md:text-4xl font-semibold text-ink-900">So läuft Ihr Termin ab</h2>
+        <p class="mt-4 text-mist-600 text-lg">Drei klare Schritte &ndash; ohne Unsicherheiten.</p>
+      </div>
+
+      <div class="mt-16 grid gap-12 lg:grid-cols-3 lg:gap-8 relative">
+        <div class="hidden lg:block absolute top-6 left-0 right-0 h-px bg-mist-100" aria-hidden="true"></div>
+        <% steps.each_with_index do |step, i| %>
+          <div class="reveal relative text-center lg:text-left" data-controller="reveal" data-reveal-delay="<%= i * 100 %>">
+            <div class="relative z-10 w-12 h-12 mx-auto lg:mx-0 rounded-full bg-brand-red text-mist-50 flex items-center justify-center font-heading text-lg font-semibold">
+              <%= i + 1 %>
+            </div>
+            <h3 class="mt-6 font-heading text-xl font-semibold text-ink-900"><%= raw step[:title] %></h3>
+            <p class="mt-3 text-mist-600"><%= step[:text] %></p>
+          </div>
+        <% end %>
       </div>
     </div>
   </section>
 
   <%# ---------------------------------------------------------------- %>
-  <%# Kontakt %>
+  <%# Red CTA banner %>
   <%# ---------------------------------------------------------------- %>
-  <section id="kontakt" class="bg-mist-50 px-6 py-20 lg:py-[120px]">
-    <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-2">
-      <div class="reveal order-2 lg:order-1" data-controller="reveal">
-        <div class="rounded-2xl overflow-hidden shadow-sm h-80 lg:h-full min-h-[320px]">
-          <iframe
-            src="https://www.google.com/maps?q=Bernstrasse+50,+3053+M%C3%BCnchenbuchsee&output=embed"
-            class="w-full h-full border-0"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Standort Garage Hofwil AG, Bernstrasse 50, 3053 Münchenbuchsee"></iframe>
-        </div>
-      </div>
-
-      <div class="reveal order-1 lg:order-2" data-controller="reveal" data-reveal-delay="100">
-        <h2 class="font-heading text-3xl md:text-4xl font-semibold">Bereit für Ihren nächsten Termin?</h2>
-        <p class="mt-4 text-mist-600 text-lg">
-          Vereinbaren Sie noch heute Ihre kostenlose Diagnose &ndash; schnell, unverbindlich und persönlich.
-        </p>
-        <a href="#" class="btn-primary mt-6 inline-flex items-center rounded-full px-8 py-4 font-heading text-base font-semibold">
-          Gratis Diagnose buchen
-        </a>
-
-        <div class="mt-12">
-          <h3 class="font-heading text-xl font-semibold">Noch nicht überzeugt?</h3>
-          <p class="mt-3 text-mist-600">
-            Haben Sie Fragen zu Ihrem Fahrzeug oder unseren Leistungen? Schreiben Sie uns &ndash; wir melden uns persönlich und beraten Sie gerne unverbindlich.
-          </p>
-
-          <%= form_with url: "#", method: :post, local: true, class: "mt-6 grid gap-4" do |form| %>
-            <div>
-              <%= form.label :name, "Name", class: "block font-heading text-sm font-medium mb-2" %>
-              <%= form.text_field :name, required: true, class: "w-full rounded-lg border border-mist-100 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-red" %>
-            </div>
-            <div class="grid gap-4 sm:grid-cols-2">
-              <div>
-                <%= form.label :phone, "Telefon", class: "block font-heading text-sm font-medium mb-2" %>
-                <%= form.telephone_field :phone, class: "w-full rounded-lg border border-mist-100 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-red" %>
-              </div>
-              <div>
-                <%= form.label :email, "E-Mail", class: "block font-heading text-sm font-medium mb-2" %>
-                <%= form.email_field :email, required: true, class: "w-full rounded-lg border border-mist-100 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-red" %>
-              </div>
-            </div>
-            <div>
-              <%= form.label :message, "Nachricht", class: "block font-heading text-sm font-medium mb-2" %>
-              <%= form.text_area :message, rows: 4, required: true, class: "w-full rounded-lg border border-mist-100 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-red" %>
-            </div>
-            <%= form.submit "Anfrage senden", class: "btn-primary justify-self-start rounded-full px-8 py-4 font-heading text-base font-semibold cursor-pointer border-0" %>
-          <% end %>
-        </div>
-      </div>
+  <section class="bg-brand-red px-6 py-20">
+    <div class="max-w-[1200px] mx-auto text-center text-white">
+      <h2 class="font-heading text-3xl md:text-4xl font-semibold">Bereit für Ihren nächsten Termin?</h2>
+      <p class="mt-4 text-white/85 text-lg max-w-xl mx-auto">
+        Kontaktieren Sie uns &ndash; unverbindlich, transparent und ohne versteckte Kosten.
+      </p>
+      <a href="/kontakt" class="btn-white mt-8 inline-flex items-center justify-center rounded-full px-8 py-4 text-base">
+        Jetzt Kontakt aufnehmen
+      </a>
     </div>
   </section>
 </main>
-
-<%# ---------------------------------------------------------------- %>
-<%# Footer %>
-<%# ---------------------------------------------------------------- %>
-<footer class="bg-ink-900 text-mist-50 px-6 pt-20 pb-10">
-  <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-3">
-    <div>
-      <%= image_tag "logo/garage-hofwil-logo-weiss.png", alt: "Garage Hofwil AG", class: "h-10 w-auto" %>
-      <p class="mt-4 text-mist-100/70 max-w-sm">
-        Ihr Partner für Service, Reparatur, Diagnose und MFK aller Fahrzeugmarken &ndash; seit über 25 Jahren in Münchenbuchsee.
-      </p>
-    </div>
-
-    <nav class="font-heading text-sm" aria-label="Footer Navigation">
-      <h3 class="text-mist-50 font-semibold mb-4">Navigation</h3>
-      <ul class="space-y-3 text-mist-100/70">
-        <li><a href="#startseite" class="hover:text-brand-red transition-colors">Startseite</a></li>
-        <li><a href="#leistungen" class="hover:text-brand-red transition-colors">Leistungen</a></li>
-        <li><a href="#" class="hover:text-brand-red transition-colors">Kauf &amp; Verkauf</a></li>
-        <li><a href="#team" class="hover:text-brand-red transition-colors">Über Uns</a></li>
-        <li><a href="#kontakt" class="hover:text-brand-red transition-colors">Kontakt</a></li>
-      </ul>
-    </nav>
-
-    <div class="font-heading text-sm">
-      <h3 class="text-mist-50 font-semibold mb-4">Kontakt &amp; Öffnungszeiten</h3>
-      <ul class="space-y-3 text-mist-100/70">
-        <li class="flex items-center gap-3"><%= render "icon", name: "phone", css_class: "w-4 h-4 text-brand-red shrink-0" %> +41 31 869 00 00</li>
-        <li class="flex items-center gap-3"><%= render "icon", name: "email", css_class: "w-4 h-4 text-brand-red shrink-0" %> info@garage-hofwil.ch</li>
-        <li class="flex items-center gap-3"><%= render "icon", name: "location", css_class: "w-4 h-4 text-brand-red shrink-0" %> Bernstrasse 50, 3053 Münchenbuchsee</li>
-        <li class="flex items-start gap-3">
-          <%= render "icon", name: "clock", css_class: "w-4 h-4 text-brand-red shrink-0 mt-0.5" %>
-          <span>Mo&ndash;Fr: 07:00&ndash;18:00 Uhr<br>Sa: nach Vereinbarung</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="max-w-[1200px] mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <p class="text-sm text-mist-100/60">&copy; <%= Date.current.year %> Garage Hofwil AG. Alle Rechte vorbehalten.</p>
-    <div class="flex items-center gap-4">
-      <a href="#" aria-label="Instagram" class="text-mist-100/70 hover:text-brand-red transition-colors"><%= render "icon", name: "instagram", css_class: "w-5 h-5" %></a>
-      <a href="#" aria-label="LinkedIn" class="text-mist-100/70 hover:text-brand-red transition-colors"><%= render "icon", name: "linkedin", css_class: "w-5 h-5" %></a>
-    </div>
-  </div>
-</footer>

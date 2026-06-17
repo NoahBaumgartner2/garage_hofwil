@@ -1,0 +1,143 @@
+<%
+  trust_points = [
+    { icon: "shield-check", title: "Geprüfte Fahrzeuge",   text: "Jedes Fahrzeug wird vor dem Verkauf von unseren Mechanikern geprüft. Sie kaufen mit gutem Gewissen." },
+    { icon: "eye",          title: "Transparente Beratung", text: "Wir erklären Ihnen den Zustand des Fahrzeugs ehrlich &ndash; ohne Beschönigungen, ohne versteckte Mängel." },
+    { icon: "key",          title: "Probefahrt möglich",   text: "Gerne arrangieren wir eine Probefahrt. Kommen Sie vorbei oder melden Sie sich telefonisch." },
+  ]
+%>
+
+<main>
+  <%# ---------------------------------------------------------------- %>
+  <%# Page hero %>
+  <%# ---------------------------------------------------------------- %>
+  <section class="page-hero">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <p class="font-heading text-sm font-semibold uppercase tracking-wider text-brand-red mb-3">Fahrzeuge</p>
+      <h1 class="font-heading text-4xl md:text-5xl font-semibold text-white">Kauf &amp; Verkauf</h1>
+      <p class="mt-4 text-white/75 text-lg max-w-2xl mx-auto">
+        Suchen Sie ein geprüftes Occasionsfahrzeug oder möchten Sie Ihr Auto verkaufen? Wir begleiten Sie vertrauensvoll durch den gesamten Prozess.
+      </p>
+    </div>
+  </section>
+
+  <%# ---------------------------------------------------------------- %>
+  <%# AutoScout24 Fahrzeugangebote %>
+  <%# ---------------------------------------------------------------- %>
+  <section class="bg-mist-50 px-6 py-20 lg:py-[120px] dm-light-1">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="reveal max-w-2xl" data-controller="reveal">
+        <h2 class="font-heading text-3xl md:text-4xl font-semibold text-ink-900">Unsere aktuellen Fahrzeugangebote</h2>
+        <p class="mt-4 text-mist-600 text-lg">
+          Unsere zum Verkauf stehenden Occasionsfahrzeuge sind direkt auf AutoScout24 inseriert &ndash; aktuell, übersichtlich und mit allen Fahrzeugdetails.
+        </p>
+      </div>
+
+      <div class="mt-10 reveal" data-controller="reveal" data-reveal-delay="100">
+        <div class="autoscout-frame">
+          <%# AutoScout24 embedding is blocked by X-Frame-Options policy.
+              Replace the href below with the actual AutoScout24 dealer page URL.
+              Example: https://www.autoscout24.ch/de/h/garage-hofwil-ag %>
+          <div class="w-16 h-16 rounded-full bg-mist-100 flex items-center justify-center mb-2">
+            <%= render "pages/icon", name: "car", css_class: "w-8 h-8 text-brand-red" %>
+          </div>
+          <h3 class="font-heading text-xl font-semibold text-ink-900">Fahrzeuge auf AutoScout24 ansehen</h3>
+          <p class="text-mist-600 text-base max-w-sm mx-auto">
+            Unsere aktuellen Angebote finden Sie auf unserer AutoScout24-Seite &ndash; mit Fotos, Kilometerstand und Preis.
+          </p>
+          <a
+            href="https://www.autoscout24.ch"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary inline-flex items-center gap-2.5 rounded-full px-8 py-4 font-heading text-base font-semibold">
+            <%= render "pages/icon", name: "external-link", css_class: "w-5 h-5" %>
+            Fahrzeuge auf AutoScout24 ansehen
+          </a>
+          <p class="text-mist-600 text-sm">
+            Öffnet AutoScout24 in einem neuen Tab &ndash; kostenlos und ohne Registrierung.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# ---------------------------------------------------------------- %>
+  <%# Fahrzeug verkaufen %>
+  <%# ---------------------------------------------------------------- %>
+  <section class="bg-white px-6 py-20 lg:py-[120px] dm-light-2">
+    <div class="max-w-[1200px] mx-auto grid gap-16 lg:grid-cols-2 items-center">
+      <div class="reveal" data-controller="reveal">
+        <p class="font-heading text-sm font-semibold uppercase tracking-wider text-brand-red mb-3">Ihr Fahrzeug verkaufen</p>
+        <h2 class="font-heading text-3xl md:text-4xl font-semibold text-ink-900">Sie möchten Ihr Auto verkaufen?</h2>
+        <p class="mt-5 text-mist-600 text-lg leading-relaxed">
+          Wir schätzen Ihr Fahrzeug fair ein und helfen Ihnen beim Verkaufsprozess &ndash; unkompliziert und transparent. Kontaktieren Sie uns für eine kostenlose Ersteinschätzung.
+        </p>
+        <ul class="mt-6 space-y-3 text-mist-600">
+          <li class="flex items-start gap-3">
+            <%= render "pages/icon", name: "check-circle", css_class: "w-5 h-5 text-brand-red shrink-0 mt-0.5" %>
+            <span>Kostenlose Fahrzeugbewertung durch Fachpersonal</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <%= render "pages/icon", name: "check-circle", css_class: "w-5 h-5 text-brand-red shrink-0 mt-0.5" %>
+            <span>Fairer Preis, keine Zwischenhändler</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <%= render "pages/icon", name: "check-circle", css_class: "w-5 h-5 text-brand-red shrink-0 mt-0.5" %>
+            <span>Schnelle Abwicklung ohne bürokratischen Aufwand</span>
+          </li>
+        </ul>
+        <a href="/kontakt" class="btn-primary mt-8 inline-flex items-center rounded-full px-8 py-4 font-heading text-base font-semibold">
+          Fahrzeug bewerten lassen
+        </a>
+      </div>
+
+      <div class="reveal" data-controller="reveal" data-reveal-delay="150">
+        <div class="overflow-hidden rounded-2xl aspect-[4/3] shadow-lg">
+          <%= image_tag "workshop/fahrzeug-rot.jpg", alt: "Fahrzeug zum Verkauf", class: "w-full h-full object-cover" %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# ---------------------------------------------------------------- %>
+  <%# Trust points %>
+  <%# ---------------------------------------------------------------- %>
+  <section class="bg-ink-900 px-6 py-20">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="reveal text-center mb-12" data-controller="reveal">
+        <h2 class="font-heading text-3xl font-semibold text-white">Warum bei Garage Hofwil kaufen?</h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <% trust_points.each_with_index do |pt, i| %>
+          <div class="trust-card reveal bg-ink-800 border border-white/8 rounded-2xl p-8" data-controller="reveal" data-reveal-delay="<%= i * 80 %>">
+            <div class="w-11 h-11 rounded-full bg-brand-red/15 text-brand-red flex items-center justify-center mb-5">
+              <%= render "pages/icon", name: pt[:icon], css_class: "w-5 h-5" %>
+            </div>
+            <h3 class="font-heading text-lg font-semibold text-white"><%= pt[:title] %></h3>
+            <p class="mt-2 text-mist-100/65 text-sm leading-relaxed"><%= raw pt[:text] %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <%# ---------------------------------------------------------------- %>
+  <%# CTA %>
+  <%# ---------------------------------------------------------------- %>
+  <section class="bg-brand-red px-6 py-16">
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      <div>
+        <h2 class="font-heading text-2xl md:text-3xl font-semibold text-white">Fragen zu einem Fahrzeug?</h2>
+        <p class="text-white/80 mt-1">Rufen Sie uns an oder schreiben Sie uns &ndash; wir beraten Sie gerne.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+        <a href="tel:+41318690000" class="btn-white inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-heading font-semibold">
+          <%= render "pages/icon", name: "phone", css_class: "w-4 h-4" %>
+          +41 31 869 00 00
+        </a>
+        <a href="/kontakt" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-heading text-sm font-semibold text-white border border-white/40 hover:border-white hover:bg-white/10 transition-colors">
+          Kontaktformular
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
