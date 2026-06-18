@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="de-CH">
   <head>
-    <title>Garage Hofwil AG &mdash; Der Mechaniker Ihres Vertrauens</title>
-    <meta name="description" content="Garage Hofwil AG in Münchenbuchsee: seit über 25 Jahren Ihr Partner für Service, Reparatur, Diagnose und MFK aller Fahrzeugmarken.">
+    <title>Garage Hofwil AG &mdash; Ihr Mechaniker des Vertrauens</title>
+    <meta name="description" content="Garage Hofwil AG in Münchenbuchsee: Ihr Partner für Service, Reparatur, Elektronik, MFK und Diagnose aller Fahrzeugmarken.">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,9 +14,167 @@
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%# Prevent flash of unstyled dark/light content %>
+    <script>
+      (function () {
+        var t = localStorage.getItem('gh-theme') ||
+          (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
   </head>
 
   <body class="font-sans text-ink-900 antialiased">
+
+    <%# Flash messages %>
+    <% if flash[:notice] %>
+      <div class="flash-notice fixed top-24 left-1/2 z-[200] bg-green-600 text-white px-6 py-4 rounded-xl shadow-xl font-heading text-sm max-w-sm text-center" id="flash-msg">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <%# Navigation %>
+    <% current = request.path %>
+    <header id="site-nav" data-controller="nav" class="fixed inset-x-0 top-0 z-50">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+        <div class="nav-inner flex items-center justify-between">
+
+          <%# Logo %>
+          <a href="/" class="shrink-0">
+            <%= image_tag "logo/garage-hofwil-logo-weiss.png", alt: "Garage Hofwil AG", class: "h-10 w-auto nav-logo-light" %>
+            <%= image_tag "logo/garage-hofwil-logo.png",       alt: "Garage Hofwil AG", class: "h-10 w-auto nav-logo-dark" %>
+          </a>
+
+          <%# Desktop nav %>
+          <nav class="hidden lg:flex items-center gap-8 font-heading text-sm font-medium" aria-label="Hauptnavigation">
+            <a href="/"            class="nav-link <%= 'is-active' if current == '/' %> hover:text-brand-red transition-colors">Startseite</a>
+            <a href="/leistungen"  class="nav-link <%= 'is-active' if current == '/leistungen' %> hover:text-brand-red transition-colors">Leistungen</a>
+            <a href="/kauf-verkauf" class="nav-link <%= 'is-active' if current == '/kauf-verkauf' %> hover:text-brand-red transition-colors">Kauf &amp; Verkauf</a>
+            <a href="/kontakt"     class="nav-link <%= 'is-active' if current == '/kontakt' %> hover:text-brand-red transition-colors">Kontakt</a>
+          </nav>
+
+          <%# Desktop CTA + dark toggle %>
+          <div class="hidden lg:flex items-center gap-3">
+            <button class="theme-toggle-btn" aria-label="Darkmodus umschalten" onclick="toggleTheme()">
+              <%= render "pages/icon", name: "sun",  css_class: "w-4 h-4 icon-sun" %>
+              <%= render "pages/icon", name: "moon", css_class: "w-4 h-4 icon-moon" %>
+            </button>
+            <a href="/kontakt" class="btn-primary btn-glow-subtle inline-flex items-center rounded-full px-6 py-2.5 font-heading text-sm font-semibold">
+              Termin buchen
+            </a>
+          </div>
+
+          <%# Mobile: dark toggle + hamburger %>
+          <div class="flex items-center gap-2 lg:hidden">
+            <button class="theme-toggle-btn" aria-label="Darkmodus umschalten" onclick="toggleTheme()">
+              <%= render "pages/icon", name: "sun",  css_class: "w-4 h-4 icon-sun" %>
+              <%= render "pages/icon", name: "moon", css_class: "w-4 h-4 icon-moon" %>
+            </button>
+            <button type="button" data-action="nav#toggle" aria-label="Menü öffnen" class="menu-toggle">
+              <%= render "pages/icon", name: "menu", css_class: "w-7 h-7" %>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <%# Mobile menu %>
+      <div data-nav-target="menu" class="hidden lg:hidden bg-white border-t border-mist-100 shadow-lg">
+        <nav class="flex flex-col px-6 py-6 gap-5 font-heading text-base font-medium text-ink-900" aria-label="Mobile Navigation">
+          <a href="/"             data-action="nav#close" class="<%= 'text-brand-red' if current == '/' %>">Startseite</a>
+          <a href="/leistungen"   data-action="nav#close" class="<%= 'text-brand-red' if current == '/leistungen' %>">Leistungen</a>
+          <a href="/kauf-verkauf" data-action="nav#close" class="<%= 'text-brand-red' if current == '/kauf-verkauf' %>">Kauf &amp; Verkauf</a>
+          <a href="/kontakt"      data-action="nav#close" class="<%= 'text-brand-red' if current == '/kontakt' %>">Kontakt</a>
+          <a href="/kontakt" data-action="nav#close" class="btn-primary inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold">Termin buchen</a>
+        </nav>
+      </div>
+    </header>
+
+    <%# Page content %>
     <%= yield %>
+
+    <%# Contact form – shown on every page except /kontakt (which has its own) %>
+    <% unless request.path == '/kontakt' %>
+      <%= render "pages/contact_section" %>
+    <% end %>
+
+    <%# Footer %>
+    <footer class="bg-ink-900 text-mist-50 px-6 pt-20 pb-10">
+      <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-3">
+        <div>
+          <%= image_tag "logo/garage-hofwil-logo-weiss.png", alt: "Garage Hofwil AG", class: "h-10 w-auto" %>
+          <p class="mt-4 text-mist-100/70 max-w-sm text-sm leading-relaxed">
+            Ihr Partner für Service, Reparatur, Elektronik, Diagnose und MFK aller Fahrzeugmarken &ndash; seit über 25 Jahren in Münchenbuchsee.
+          </p>
+        </div>
+
+        <nav class="font-heading text-sm" aria-label="Footer Navigation">
+          <h3 class="text-mist-50 font-semibold mb-4">Navigation</h3>
+          <ul class="space-y-3 text-mist-100/70">
+            <li><a href="/"             class="hover:text-brand-red transition-colors">Startseite</a></li>
+            <li><a href="/leistungen"   class="hover:text-brand-red transition-colors">Leistungen</a></li>
+            <li><a href="/kauf-verkauf" class="hover:text-brand-red transition-colors">Kauf &amp; Verkauf</a></li>
+            <li><a href="/kontakt"      class="hover:text-brand-red transition-colors">Kontakt</a></li>
+          </ul>
+        </nav>
+
+        <div class="font-heading text-sm">
+          <h3 class="text-mist-50 font-semibold mb-4">Kontakt &amp; Öffnungszeiten</h3>
+          <ul class="space-y-3 text-mist-100/70">
+            <li class="flex items-center gap-3">
+              <%= render "pages/icon", name: "phone",    css_class: "w-4 h-4 text-brand-red shrink-0" %>
+              <a href="tel:+41318690000" class="hover:text-brand-red transition-colors">+41 31 869 00 00</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <%= render "pages/icon", name: "email",    css_class: "w-4 h-4 text-brand-red shrink-0" %>
+              <a href="mailto:info@garage-hofwil.ch" class="hover:text-brand-red transition-colors">info@garage-hofwil.ch</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <%= render "pages/icon", name: "location", css_class: "w-4 h-4 text-brand-red shrink-0" %>
+              <span>Bernstrasse 50, 3053 Münchenbuchsee</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= render "pages/icon", name: "clock",    css_class: "w-4 h-4 text-brand-red shrink-0 mt-0.5" %>
+              <span>Mo&ndash;Fr: 07:00&ndash;18:00 Uhr<br>Sa: nach Vereinbarung</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="max-w-[1200px] mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-mist-100/60">
+        <p>&copy; <%= Date.current.year %> Garage Hofwil AG. Alle Rechte vorbehalten.</p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-brand-red transition-colors">Impressum</a>
+          <a href="#" class="hover:text-brand-red transition-colors">Datenschutz</a>
+          <div class="flex items-center gap-4">
+            <a href="#" aria-label="Instagram" class="text-mist-100/70 hover:text-brand-red transition-colors"><%= render "pages/icon", name: "instagram", css_class: "w-5 h-5" %></a>
+            <a href="#" aria-label="LinkedIn"  class="text-mist-100/70 hover:text-brand-red transition-colors"><%= render "pages/icon", name: "linkedin",  css_class: "w-5 h-5" %></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <%# Dark mode toggle script %>
+    <script>
+      function toggleTheme() {
+        var current = document.documentElement.getAttribute('data-theme') || 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('gh-theme', next);
+      }
+
+      <%# Auto-dismiss flash message %>
+      (function () {
+        var msg = document.getElementById('flash-msg');
+        if (!msg) return;
+        setTimeout(function () {
+          msg.style.transition = 'opacity 500ms ease';
+          msg.style.opacity = '0';
+          setTimeout(function () { msg.remove(); }, 500);
+        }, 5000);
+      })();
+    </script>
+
   </body>
 </html>

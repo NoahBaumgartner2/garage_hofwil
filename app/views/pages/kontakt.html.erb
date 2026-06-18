@@ -1,0 +1,168 @@
+<%
+  service_options = [
+    "Frage zu Fahrzeug / Sonstiges",
+    "Gratis Fahrzeug Check",
+    "Service",
+    "Reparatur",
+    "MFK",
+    "Elektronik",
+    "Radwechsel / Reifen",
+    "KlimaService",
+    "Kauf & Verkauf",
+    "Andere Services",
+    "Anderes",
+  ]
+
+  contact_info = [
+    { icon: "phone",    label: "Telefon", value: "+41 31 869 00 00",      href: "tel:+41318690000" },
+    { icon: "email",    label: "E-Mail",  value: "info@garage-hofwil.ch", href: "mailto:info@garage-hofwil.ch" },
+    { icon: "location", label: "Adresse", value: "Bernstrasse 50, 3053 Münchenbuchsee", href: nil },
+  ]
+
+  field_class = "w-full rounded-lg border border-mist-100 bg-white px-4 py-3 text-ink-900 text-sm focus:outline-none focus:ring-2 focus:ring-brand-red transition-shadow"
+  label_class = "block font-heading text-sm font-medium text-ink-900 mb-2"
+%>
+
+<main>
+  <%# ---------------------------------------------------------------- %>
+  <%# Page hero %>
+  <%# ---------------------------------------------------------------- %>
+  <section class="page-hero">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <p class="font-heading text-sm font-semibold uppercase tracking-wider text-brand-red mb-3">Wir sind für Sie da</p>
+      <h1 class="font-heading text-4xl md:text-5xl font-semibold text-white">Kontakt</h1>
+      <p class="mt-4 text-white/75 text-lg max-w-2xl mx-auto leading-relaxed">
+        Haben Sie eine Frage zu Ihrem Fahrzeug oder möchten Sie einen Termin vereinbaren? Rufen Sie uns direkt an oder nutzen Sie das Kontaktformular. Auch allgemeine Fragen zu Ihrem Fahrzeug beantworten wir so schnell wie möglich.
+      </p>
+    </div>
+  </section>
+
+  <%# ---------------------------------------------------------------- %>
+  <%# Form + contact details %>
+  <%# ---------------------------------------------------------------- %>
+  <section class="bg-mist-50 px-6 py-20 lg:py-[120px] dm-light-1">
+    <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-5 lg:gap-16">
+
+      <%# ----- Contact form (wider col) ----- %>
+      <div class="reveal lg:col-span-3 order-1" data-controller="reveal" data-reveal-delay="100">
+        <h2 class="font-heading text-2xl font-semibold text-ink-900 mb-2">Anfrage senden</h2>
+        <p class="text-mist-600 mb-8">
+          Sie müssen keine Reparatur buchen &ndash; auch allgemeine Fragen zu Ihrem Fahrzeug beantworten wir gerne.
+        </p>
+
+        <%= form_with url: contact_submit_path, method: :post, local: true, class: "grid gap-5" do |form| %>
+
+          <%# Row: Name + Telefon %>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="contact_name" class="<%= label_class %>">
+                Name / Vorname <span class="text-brand-red" aria-hidden="true">*</span>
+              </label>
+              <%= form.text_field :name, id: "contact_name", required: true, placeholder: "z. B. Anna Müller", class: field_class %>
+            </div>
+            <div>
+              <label for="contact_telefon" class="<%= label_class %>">
+                Telefonnummer <span class="text-brand-red" aria-hidden="true">*</span>
+              </label>
+              <%= form.telephone_field :telefon, id: "contact_telefon", required: true, placeholder: "+41 79 000 00 00", class: field_class %>
+            </div>
+          </div>
+
+          <%# Email %>
+          <div>
+            <label for="contact_email" class="<%= label_class %>">
+              E-Mail-Adresse <span class="text-brand-red" aria-hidden="true">*</span>
+            </label>
+            <%= form.email_field :email, id: "contact_email", required: true, placeholder: "ihre@email.ch", class: field_class %>
+          </div>
+
+          <%# Fahrzeugmodell (optional) %>
+          <div>
+            <label for="contact_fahrzeugmodell" class="<%= label_class %>">
+              Fahrzeugmodell <span class="text-mist-600 font-normal">(optional)</span>
+            </label>
+            <%= form.text_field :fahrzeugmodell, id: "contact_fahrzeugmodell", placeholder: "z. B. VW Golf 2018", class: field_class %>
+          </div>
+
+          <%# Service dropdown %>
+          <div>
+            <label for="contact_leistung" class="<%= label_class %>">Grund der Anfrage</label>
+            <%= form.select :leistung, service_options,
+              { include_blank: "Bitte auswählen …" },
+              { id: "contact_leistung", class: field_class } %>
+          </div>
+
+          <%# Message %>
+          <div>
+            <label for="contact_bemerkung" class="<%= label_class %>">Bemerkung / Frage</label>
+            <%= form.text_area :bemerkung, id: "contact_bemerkung", rows: 5,
+              placeholder: "Beschreiben Sie kurz Ihr Anliegen …",
+              class: "#{field_class} resize-y" %>
+          </div>
+
+          <p class="text-xs text-mist-600">
+            Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Bearbeitung Ihrer Anfrage verwendet werden.
+            Pflichtfelder sind mit <span class="text-brand-red">*</span> markiert.
+          </p>
+
+          <%= form.submit "Anfrage absenden",
+            class: "btn-primary cursor-pointer rounded-full px-8 py-4 font-heading text-base font-semibold justify-self-start border-0" %>
+
+        <% end %>
+      </div>
+
+      <%# ----- Contact details + map (narrower col) ----- %>
+      <div class="reveal lg:col-span-2 order-2" data-controller="reveal">
+        <h2 class="font-heading text-2xl font-semibold text-ink-900 mb-6">Direkt erreichen</h2>
+
+        <ul class="space-y-5 mb-8">
+          <% contact_info.each do |info| %>
+            <li class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center shrink-0 mt-0.5">
+                <%= render "pages/icon", name: info[:icon], css_class: "w-5 h-5" %>
+              </div>
+              <div>
+                <p class="font-heading text-xs font-semibold uppercase tracking-wide text-mist-600 mb-0.5"><%= info[:label] %></p>
+                <% if info[:href] %>
+                  <a href="<%= info[:href] %>" class="text-ink-900 font-medium hover:text-brand-red transition-colors"><%= info[:value] %></a>
+                <% else %>
+                  <p class="text-ink-900 font-medium"><%= info[:value] %></p>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+
+          <%# Opening hours %>
+          <li class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center shrink-0 mt-0.5">
+              <%= render "pages/icon", name: "clock", css_class: "w-5 h-5" %>
+            </div>
+            <div>
+              <p class="font-heading text-xs font-semibold uppercase tracking-wide text-mist-600 mb-0.5">Öffnungszeiten</p>
+              <p class="text-ink-900 font-medium">Mo&ndash;Fr: 07:00&ndash;18:00 Uhr</p>
+              <p class="text-mist-600 text-sm">Sa: nach Vereinbarung</p>
+            </div>
+          </li>
+        </ul>
+
+        <%# Direct call CTA %>
+        <a href="tel:+41318690000" class="btn-primary mb-8 w-full inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 font-heading text-sm font-semibold">
+          <%= render "pages/icon", name: "phone", css_class: "w-4 h-4" %>
+          Direkt anrufen
+        </a>
+
+        <%# Map %>
+        <div class="map-wrapper overflow-hidden rounded-2xl shadow-sm h-64">
+          <iframe
+            src="https://www.google.com/maps?q=Bernstrasse+50,+3053+M%C3%BCnchenbuchsee&output=embed"
+            class="w-full h-full border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Standort Garage Hofwil AG, Bernstrasse 50, 3053 Münchenbuchsee">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>

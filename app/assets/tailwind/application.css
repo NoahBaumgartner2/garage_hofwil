@@ -14,7 +14,7 @@
 
   --color-mist-600: #565d65;
   --color-mist-100: #e7eaed;
-  --color-mist-50: #f3f5f6;
+  --color-mist-50:  #f3f5f6;
 }
 
 @layer base {
@@ -25,6 +25,8 @@
   body {
     font-family: var(--font-sans);
     color: var(--color-ink-900);
+    background-color: var(--color-mist-50);
+    transition: background-color 300ms ease, color 300ms ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -37,7 +39,7 @@
 }
 
 /* ---------------------------------------------------------------- */
-/* Scroll reveal animation                                            */
+/* Scroll reveal                                                       */
 /* ---------------------------------------------------------------- */
 
 .reveal {
@@ -52,7 +54,7 @@
 }
 
 /* ---------------------------------------------------------------- */
-/* Sticky navigation                                                  */
+/* Sticky navigation                                                   */
 /* ---------------------------------------------------------------- */
 
 #site-nav {
@@ -60,22 +62,16 @@
 }
 
 #site-nav.is-scrolled {
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 1px 12px rgba(12, 13, 14, 0.08);
 }
 
-#site-nav .nav-logo-dark {
-  display: none;
-}
+#site-nav .nav-logo-dark  { display: none; }
 
-#site-nav.is-scrolled .nav-logo-light {
-  display: none;
-}
-
-#site-nav.is-scrolled .nav-logo-dark {
-  display: block;
-}
+#site-nav.is-scrolled .nav-logo-light { display: none; }
+#site-nav.is-scrolled .nav-logo-dark  { display: block; }
 
 #site-nav .nav-link,
 #site-nav .menu-toggle {
@@ -87,6 +83,8 @@
 #site-nav.is-scrolled .menu-toggle {
   color: var(--color-ink-900);
 }
+
+.nav-link.is-active { color: var(--color-brand-red) !important; }
 
 #site-nav .nav-inner {
   padding-top: 1.75rem;
@@ -100,13 +98,13 @@
 }
 
 /* ---------------------------------------------------------------- */
-/* Buttons                                                            */
+/* Buttons                                                             */
 /* ---------------------------------------------------------------- */
 
 .btn-primary {
   position: relative;
   background-color: var(--color-brand-red);
-  color: var(--color-mist-50);
+  color: #f3f5f6;
   transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
 }
 
@@ -130,8 +128,22 @@
   box-shadow: 0 12px 30px -10px rgba(184, 50, 24, 0.35);
 }
 
+.btn-white {
+  background-color: #ffffff;
+  color: var(--color-brand-red);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+}
+
+.btn-white:hover {
+  background-color: var(--color-mist-50);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.25);
+}
+
 /* ---------------------------------------------------------------- */
-/* Service banner marquee                                             */
+/* Service banner marquee                                              */
 /* ---------------------------------------------------------------- */
 
 .marquee-track {
@@ -146,11 +158,11 @@
 
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
 }
 
 /* ---------------------------------------------------------------- */
-/* Service wheel                                                      */
+/* Service wheel                                                       */
 /* ---------------------------------------------------------------- */
 
 .service-wheel {
@@ -161,52 +173,8 @@
   animation: spin-slow-reverse 60s linear infinite;
 }
 
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes spin-slow-reverse {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track,
-  .service-wheel,
-  .service-wheel-icon-inner {
-    animation: none;
-  }
-
-  .reveal {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ---------------------------------------------------------------- */
-/* Cards                                                              */
-/* ---------------------------------------------------------------- */
-
-.value-card,
-.team-card {
-  transition: transform 300ms ease, box-shadow 300ms ease;
-}
-
-.value-card:hover,
-.team-card:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 20px 40px -20px rgba(12, 13, 14, 0.25);
-}
-
-.team-card:hover .team-card-image img {
-  transform: scale(1.05);
-}
-
-.team-card-image img {
-  transition: transform 500ms ease;
-}
+@keyframes spin-slow         { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+@keyframes spin-slow-reverse { from { transform: rotate(0deg); }   to { transform: rotate(-360deg); } }
 
 .service-icon-card {
   transition: transform 250ms ease;
@@ -219,9 +187,570 @@
 .service-icon-card:hover .service-icon-circle {
   border-color: var(--color-brand-red);
   background-color: var(--color-brand-red);
-  color: var(--color-mist-50);
+  color: #f3f5f6;
 }
 
 .service-icon-circle {
   transition: background-color 250ms ease, border-color 250ms ease, color 250ms ease;
 }
+
+/* ---------------------------------------------------------------- */
+/* Cards                                                               */
+/* ---------------------------------------------------------------- */
+
+.value-card {
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px -20px rgba(12, 13, 14, 0.25);
+}
+
+/* ---------------------------------------------------------------- */
+/* Dark value cards (inside bg-ink-900 section)                       */
+/* ---------------------------------------------------------------- */
+
+.value-card-dark {
+  background-color: var(--color-ink-800);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+}
+
+.value-card-dark:hover {
+  border-color: rgba(184, 50, 24, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -20px rgba(184, 50, 24, 0.3);
+}
+
+/* ---------------------------------------------------------------- */
+/* Leistungen: primary service cards (featured 4)                      */
+/* ---------------------------------------------------------------- */
+
+.primary-service-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-mist-100);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 2px 16px -6px rgba(12, 13, 14, 0.09);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+}
+
+.primary-service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 44px -16px rgba(12, 13, 14, 0.20);
+  border-color: var(--color-brand-red);
+}
+
+.primary-service-card .card-grow { flex-grow: 1; }
+
+/* ---------------------------------------------------------------- */
+/* Leistungen: vehicle handover banner (yellow concept)               */
+/* ---------------------------------------------------------------- */
+
+.handover-banner {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-top: 3px solid #f59e0b;
+  border-bottom: 1px solid #fde68a;
+  padding: 3.5rem 1.5rem;
+}
+
+.handover-banner-icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 158, 11, 0.15);
+  color: #b45309;
+  flex-shrink: 0;
+}
+
+.handover-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #92400e;
+}
+
+/* Dark mode: handover banner */
+[data-theme="dark"] .handover-banner {
+  background: linear-gradient(135deg, #1c1500 0%, #1f1a00 100%);
+  border-top-color: #b45309;
+  border-bottom-color: #2d2000;
+}
+
+[data-theme="dark"] .handover-banner h3,
+[data-theme="dark"] .handover-banner h2 { color: #fef3c7; }
+[data-theme="dark"] .handover-banner p   { color: #d97706; }
+[data-theme="dark"] .handover-banner-icon {
+  background: rgba(180, 83, 9, 0.25);
+  color: #fbbf24;
+}
+[data-theme="dark"] .handover-check {
+  background: rgba(180, 83, 9, 0.2);
+  border-color: rgba(180, 83, 9, 0.4);
+  color: #fbbf24;
+}
+
+/* Contained card version (replaces full-width section) */
+.handover-card {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #fde68a;
+  border-radius: 1.25rem;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 2px 20px -6px rgba(245, 158, 11, 0.12), 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* ---------------------------------------------------------------- */
+/* Leistungen page: secondary service cards                            */
+/* ---------------------------------------------------------------- */
+
+.service-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-mist-100);
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -16px rgba(12, 13, 14, 0.18);
+  border-color: var(--color-brand-red);
+}
+
+.service-card-highlight {
+  border-color: var(--color-brand-red);
+  background: linear-gradient(135deg, #fff7f5 0%, #ffffff 60%);
+}
+
+/* ---------------------------------------------------------------- */
+/* Accordion (Andere Services)                                         */
+/* ---------------------------------------------------------------- */
+
+.accordion-details {
+  border: 1px solid var(--color-mist-100);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.accordion-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.125rem;
+  user-select: none;
+  list-style: none;
+  background-color: #ffffff;
+  transition: background-color 200ms ease;
+}
+
+.accordion-summary::-webkit-details-marker { display: none; }
+
+.accordion-summary:hover {
+  background-color: var(--color-mist-50);
+}
+
+.accordion-chevron {
+  transition: transform 300ms ease;
+  flex-shrink: 0;
+  color: var(--color-brand-red);
+}
+
+details[open] .accordion-chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-body {
+  padding: 0 2rem 2rem;
+  background-color: #ffffff;
+}
+
+/* ---------------------------------------------------------------- */
+/* Notfall / Panne banner                                              */
+/* ---------------------------------------------------------------- */
+
+.notfall-banner {
+  background-color: var(--color-brand-red);
+  color: #ffffff;
+}
+
+/* ---------------------------------------------------------------- */
+/* Button glow animation                                               */
+/* ---------------------------------------------------------------- */
+
+@keyframes btn-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 50, 24, 0); }
+  50%       { box-shadow: 0 0 18px 5px rgba(184, 50, 24, 0.38), 0 0 36px 10px rgba(184, 50, 24, 0.10); }
+}
+
+@keyframes btn-glow-subtle {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 50, 24, 0); }
+  50%       { box-shadow: 0 0 10px 3px rgba(184, 50, 24, 0.28); }
+}
+
+.btn-glow {
+  animation: btn-glow-pulse 3.5s ease-in-out infinite;
+}
+
+.btn-glow-subtle {
+  animation: btn-glow-subtle 4s ease-in-out infinite;
+}
+
+/* Pause glow on hover so the hover box-shadow takes over cleanly */
+.btn-glow:hover,
+.btn-glow-subtle:hover {
+  animation: none;
+}
+
+/* ---------------------------------------------------------------- */
+/* Theme toggle                                                        */
+/* ---------------------------------------------------------------- */
+
+/* Default state: transparent nav over dark hero – ensure visibility */
+.theme-toggle-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.60);
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Scrolled state: light nav background */
+#site-nav.is-scrolled .theme-toggle-btn {
+  border-color: var(--color-mist-100);
+  background: var(--color-mist-50);
+  color: var(--color-ink-900);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+#site-nav.is-scrolled .theme-toggle-btn:hover {
+  background: var(--color-mist-100);
+  border-color: var(--color-mist-600);
+}
+
+/* Show/hide sun & moon */
+.theme-toggle-btn .icon-sun  { display: none; }
+.theme-toggle-btn .icon-moon { display: block; }
+
+[data-theme="dark"] .theme-toggle-btn .icon-sun  { display: block; }
+[data-theme="dark"] .theme-toggle-btn .icon-moon { display: none; }
+
+/* ---------------------------------------------------------------- */
+/* Flash message                                                       */
+/* ---------------------------------------------------------------- */
+
+.flash-notice {
+  animation: slideDown 400ms ease forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-16px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ---------------------------------------------------------------- */
+/* Page hero (inner pages)                                             */
+/* ---------------------------------------------------------------- */
+
+.page-hero {
+  background-color: var(--color-ink-900);
+  padding-top: 8rem;
+  padding-bottom: 5rem;
+  text-align: center;
+  color: #f3f5f6;
+}
+
+/* ---------------------------------------------------------------- */
+/* AutoScout embed placeholder                                         */
+/* ---------------------------------------------------------------- */
+
+.autoscout-frame {
+  border: 2px dashed var(--color-mist-100);
+  border-radius: 1rem;
+  min-height: 28rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------- */
+/* Werte section: light in light mode, dark in dark mode              */
+/* ---------------------------------------------------------------- */
+
+.werte-section {
+  background-color: #ffffff;
+}
+
+/* Text inside the werte content column */
+.werte-text   { color: var(--color-ink-900); }
+.werte-para   { color: var(--color-mist-600); }
+/* Bold emphasis words use brand-red in light mode for strong contrast */
+.werte-strong { color: var(--color-brand-red); font-weight: 700; }
+
+/* Value cards in light mode */
+.werte-section .value-card-dark {
+  background-color: var(--color-mist-50);
+  border-color: var(--color-mist-100);
+}
+.werte-section .value-card-dark h3 { color: var(--color-ink-900); }
+.werte-section .value-card-dark p  { color: var(--color-mist-600); }
+
+/* Dark mode overrides */
+[data-theme="dark"] .werte-section       { background-color: #0c0d0e; }
+[data-theme="dark"] .werte-text          { color: #e7eaed; }
+[data-theme="dark"] .werte-para          { color: rgba(231, 234, 237, 0.78); }
+[data-theme="dark"] .werte-strong        { color: #ffffff; font-weight: 700; }
+[data-theme="dark"] .werte-section .value-card-dark {
+  background-color: var(--color-ink-800);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .werte-section .value-card-dark h3 { color: #e7eaed; }
+[data-theme="dark"] .werte-section .value-card-dark p  { color: rgba(243, 245, 246, 0.62); }
+
+/* Also adapt dark-mode toggle for scrolled nav over dark werte section */
+[data-theme="dark"] #site-nav.is-scrolled .theme-toggle-btn {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e7eaed;
+}
+[data-theme="dark"] #site-nav.is-scrolled .theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ---------------------------------------------------------------- */
+/* Reduced-motion                                                      */
+/* ---------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .service-wheel,
+  .service-wheel-icon-inner,
+  .btn-glow,
+  .btn-glow-subtle {
+    animation: none;
+  }
+
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ================================================================ */
+/* DARK MODE                                                          */
+/* ================================================================ */
+
+[data-theme="dark"] body {
+  background-color: #13161a;
+  color: #e7eaed;
+}
+
+/* Navigation */
+[data-theme="dark"] #site-nav.is-scrolled {
+  background-color: rgba(18, 22, 28, 0.95);
+}
+
+[data-theme="dark"] #site-nav.is-scrolled .nav-link,
+[data-theme="dark"] #site-nav.is-scrolled .menu-toggle {
+  color: #e7eaed;
+}
+
+/* In dark mode when scrolled, keep white logo */
+[data-theme="dark"] #site-nav.is-scrolled .nav-logo-light { display: block; }
+[data-theme="dark"] #site-nav.is-scrolled .nav-logo-dark  { display: none; }
+
+[data-theme="dark"] #site-nav.is-scrolled .theme-toggle-btn {
+  border-color: rgba(255,255,255,0.15);
+  color: #e7eaed;
+}
+
+[data-theme="dark"] #site-nav.is-scrolled .theme-toggle-btn:hover {
+  background-color: rgba(255,255,255,0.08);
+}
+
+/* Mobile menu */
+[data-theme="dark"] [data-nav-target="menu"] {
+  background-color: #1a1f26 !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+[data-theme="dark"] [data-nav-target="menu"] a {
+  color: #e7eaed !important;
+}
+
+/* Sections: light backgrounds → dark */
+[data-theme="dark"] .dm-light-1 { background-color: #13161a; }
+[data-theme="dark"] .dm-light-2 { background-color: #1a1f26; }
+
+/* Generic overrides for tailwind bg classes on sections/divs */
+[data-theme="dark"] section.bg-mist-50,
+[data-theme="dark"] div.bg-mist-50  { background-color: #13161a; }
+
+[data-theme="dark"] section.bg-white,
+[data-theme="dark"] div.bg-white    { background-color: #1a1f26; }
+
+/* Already-dark sections: keep as-is */
+[data-theme="dark"] section.bg-ink-900 { background-color: #0c0d0e; }
+
+/* Text */
+[data-theme="dark"] .text-ink-900   { color: #e7eaed; }
+[data-theme="dark"] .text-mist-600  { color: #8a939d; }
+[data-theme="dark"] p               { color: inherit; }
+
+/* Page hero (inner pages) */
+[data-theme="dark"] .page-hero { background-color: #0c0d0e; }
+
+/* Value cards (light sections) */
+[data-theme="dark"] .value-card {
+  background-color: #1a1f26 !important;
+  border-color: rgba(255,255,255,0.07) !important;
+}
+
+[data-theme="dark"] .value-card h3 { color: #e7eaed; }
+[data-theme="dark"] .value-card p  { color: #8a939d; }
+
+/* Handover card */
+[data-theme="dark"] .handover-card {
+  background: linear-gradient(135deg, #1c1500 0%, #1f1a00 100%);
+  border-color: #2d2000;
+}
+[data-theme="dark"] .handover-card h2 { color: #fef3c7; }
+[data-theme="dark"] .handover-card p   { color: rgba(217, 119, 6, 0.85); }
+
+/* Primary service cards */
+[data-theme="dark"] .primary-service-card {
+  background-color: #1a1f26;
+  border-color: rgba(255,255,255,0.07);
+}
+[data-theme="dark"] .primary-service-card:hover { border-color: var(--color-brand-red); }
+[data-theme="dark"] .primary-service-card h3    { color: #e7eaed; }
+[data-theme="dark"] .primary-service-card p,
+[data-theme="dark"] .primary-service-card span  { color: #8a939d; }
+[data-theme="dark"] .primary-service-card .price-line { color: #e7eaed; }
+[data-theme="dark"] .primary-service-card .duration-label { color: #5a636e; }
+
+/* Secondary service cards */
+[data-theme="dark"] .service-card {
+  background-color: #1a1f26;
+  border-color: rgba(255,255,255,0.07);
+}
+
+[data-theme="dark"] .service-card:hover {
+  border-color: var(--color-brand-red);
+}
+
+[data-theme="dark"] .service-card-highlight {
+  background: linear-gradient(135deg, #1f1815 0%, #1a1f26 60%);
+  border-color: var(--color-brand-red);
+}
+
+[data-theme="dark"] .service-card h3 { color: #e7eaed; }
+[data-theme="dark"] .service-card p  { color: #8a939d; }
+
+/* Accordion */
+[data-theme="dark"] .accordion-details { border-color: rgba(255,255,255,0.07); }
+[data-theme="dark"] .accordion-summary { background-color: #1a1f26; color: #e7eaed; }
+[data-theme="dark"] .accordion-summary:hover { background-color: #1f2530; }
+[data-theme="dark"] .accordion-body { background-color: #1a1f26; }
+[data-theme="dark"] .accordion-body .price-row { border-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .accordion-body .price-row span { color: #8a939d; }
+[data-theme="dark"] .accordion-body .price-row strong { color: #e7eaed; }
+
+/* Inputs / forms */
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="tel"],
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background-color: #1a1f26 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #e7eaed !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #5a636e;
+}
+
+/* Maps iframe wrapper */
+[data-theme="dark"] .map-wrapper { filter: brightness(0.85) saturate(0.7); }
+
+/* btn-secondary in dark mode */
+[data-theme="dark"] .btn-secondary {
+  color: #e7eaed;
+  border-color: rgba(255,255,255,0.12);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  border-color: var(--color-brand-red);
+}
+
+/* AutoScout placeholder */
+[data-theme="dark"] .autoscout-frame {
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* Footer stays dark in both modes */
+[data-theme="dark"] footer {
+  background-color: #090b0d;
+}
+
+/* Contact section (embedded at bottom of every page) */
+.contact-form-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-mist-100);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 2px 16px -8px rgba(12, 13, 14, 0.09);
+}
+
+[data-theme="dark"] .contact-form-card {
+  background-color: #1a1f26;
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+/* Kauf & Verkauf trust box */
+[data-theme="dark"] .trust-card {
+  background-color: #1a1f26;
+  border-color: rgba(255,255,255,0.07);
+}
+
+[data-theme="dark"] .trust-card h3 { color: #e7eaed; }
+[data-theme="dark"] .trust-card p  { color: #8a939d; }
