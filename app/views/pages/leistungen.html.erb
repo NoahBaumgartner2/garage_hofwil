@@ -126,26 +126,22 @@
   <%# ──────────────────────────────────────────────────────────────── %>
   <%# 1. HERO – mechanic image background                              %>
   <%# ──────────────────────────────────────────────────────────────── %>
-  <section class="relative min-h-[44vh] flex items-center justify-center text-center px-6 bg-ink-900 bg-cover bg-center"
-           style="background-image: url('<%= asset_path("team/mechaniker-1.jpg") %>');">
+  <section class="relative min-h-[52vh] flex items-center justify-center text-center px-6 bg-ink-900 bg-cover bg-center"
+           style="background-image: url('<%= asset_path("hero/leistungen-hero.jpg") %>');">
 
-    <%# Layered dark overlay for readability %>
     <div class="absolute inset-0"
-         style="background: linear-gradient(180deg,
-           rgba(10,11,13,0.80) 0%,
-           rgba(10,11,13,0.55) 45%,
-           rgba(10,11,13,0.80) 100%);"></div>
+         style="background: linear-gradient(180deg, rgba(10,11,13,0.82) 0%, rgba(10,11,13,0.55) 45%, rgba(10,11,13,0.82) 100%);"></div>
 
-    <div class="relative z-10 max-w-2xl mx-auto pt-20 pb-8">
-      <p class="reveal font-heading text-sm font-semibold uppercase tracking-wider text-brand-red mb-4"
+    <div class="relative z-10 max-w-2xl mx-auto pt-20 pb-10">
+      <p class="reveal font-heading text-sm font-semibold uppercase tracking-wider text-brand-red mb-3"
          data-controller="reveal">Was wir für Sie tun</p>
 
-      <h1 class="reveal font-heading text-3xl md:text-5xl font-semibold text-white leading-tight"
+      <h1 class="reveal font-heading text-4xl md:text-5xl font-semibold text-white leading-tight"
           data-controller="reveal" data-reveal-delay="80">
         Unsere Leistungen
       </h1>
 
-      <p class="reveal mt-4 text-white/80 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+      <p class="reveal mt-4 text-white/75 text-lg max-w-2xl mx-auto leading-relaxed"
          data-controller="reveal" data-reveal-delay="160">
         Von der einfachen Wartung bis zur komplexen Elektronikdiagnose &ndash; Garage Hofwil macht, was andere nicht können.
       </p>
@@ -281,7 +277,7 @@
           <p class="text-white/85 mt-1 text-lg">Schnelle Hilfe bei Problemen.</p>
         </div>
       </div>
-      <a href="tel:+41318690000"
+      <a href="tel:+41318694333"
          class="btn-white shrink-0 inline-flex items-center gap-2.5 rounded-full px-8 py-4 text-base font-heading font-semibold">
         <%= render "pages/icon", name: "phone", css_class: "w-5 h-5" %>
         Jetzt anrufen

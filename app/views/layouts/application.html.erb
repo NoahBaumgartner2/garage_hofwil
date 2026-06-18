@@ -7,10 +7,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
-
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -124,7 +120,7 @@
           <ul class="space-y-3 text-mist-100/70">
             <li class="flex items-center gap-3">
               <%= render "pages/icon", name: "phone",    css_class: "w-4 h-4 text-brand-red shrink-0" %>
-              <a href="tel:+41318690000" class="hover:text-brand-red transition-colors">+41 31 869 00 00</a>
+              <a href="tel:+41318694333" class="hover:text-brand-red transition-colors">+41 31 869 43 33</a>
             </li>
             <li class="flex items-center gap-3">
               <%= render "pages/icon", name: "email",    css_class: "w-4 h-4 text-brand-red shrink-0" %>
@@ -136,7 +132,7 @@
             </li>
             <li class="flex items-start gap-3">
               <%= render "pages/icon", name: "clock",    css_class: "w-4 h-4 text-brand-red shrink-0 mt-0.5" %>
-              <span>Mo&ndash;Fr: 07:00&ndash;18:00 Uhr<br>Sa: nach Vereinbarung</span>
+              <span>Mo&ndash;Fr: 08:00&ndash;12:00 / 13:30&ndash;18:30<br>Sa: 09:00&ndash;14:00 &nbsp;&bull;&nbsp; So: Geschlossen</span>
             </li>
           </ul>
         </div>
@@ -145,8 +141,8 @@
       <div class="max-w-[1200px] mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-mist-100/60">
         <p>&copy; <%= Date.current.year %> Garage Hofwil AG. Alle Rechte vorbehalten.</p>
         <div class="flex items-center gap-6">
-          <a href="#" class="hover:text-brand-red transition-colors">Impressum</a>
-          <a href="#" class="hover:text-brand-red transition-colors">Datenschutz</a>
+          <a href="/impressum"   class="hover:text-brand-red transition-colors">Impressum</a>
+          <a href="/datenschutz" class="hover:text-brand-red transition-colors">Datenschutz</a>
           <div class="flex items-center gap-4">
             <a href="#" aria-label="Instagram" class="text-mist-100/70 hover:text-brand-red transition-colors"><%= render "pages/icon", name: "instagram", css_class: "w-5 h-5" %></a>
             <a href="#" aria-label="LinkedIn"  class="text-mist-100/70 hover:text-brand-red transition-colors"><%= render "pages/icon", name: "linkedin",  css_class: "w-5 h-5" %></a>

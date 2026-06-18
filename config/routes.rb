@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   get  "/kauf-verkauf"   => "pages#kauf_verkauf",   as: :kauf_verkauf
   get  "/kontakt"        => "pages#kontakt",         as: :kontakt
   post "/kontakt/senden" => "pages#contact_submit",  as: :contact_submit
+  get  "/impressum"      => "pages#impressum",       as: :impressum
+  get  "/datenschutz"    => "pages#datenschutz",     as: :datenschutz
 end

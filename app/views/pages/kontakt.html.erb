@@ -14,7 +14,7 @@
   ]
 
   contact_info = [
-    { icon: "phone",    label: "Telefon", value: "+41 31 869 00 00",      href: "tel:+41318690000" },
+    { icon: "phone",    label: "Telefon", value: "+41 31 869 43 33",      href: "tel:+41318694333" },
     { icon: "email",    label: "E-Mail",  value: "info@garage-hofwil.ch", href: "mailto:info@garage-hofwil.ch" },
     { icon: "location", label: "Adresse", value: "Bernstrasse 50, 3053 Münchenbuchsee", href: nil },
   ]
@@ -27,10 +27,15 @@
   <%# ---------------------------------------------------------------- %>
   <%# Page hero %>
   <%# ---------------------------------------------------------------- %>
-  <section class="page-hero">
-    <div class="max-w-[1200px] mx-auto px-6">
+  <section class="relative min-h-[52vh] flex items-center justify-center text-center px-6 bg-ink-900 bg-cover bg-center"
+           style="background-image: url('<%= asset_path("hero/kontakt-hero.jpg") %>');">
+
+    <div class="absolute inset-0"
+         style="background: linear-gradient(180deg, rgba(10,11,13,0.82) 0%, rgba(10,11,13,0.55) 45%, rgba(10,11,13,0.82) 100%);"></div>
+
+    <div class="relative z-10 max-w-2xl mx-auto pt-20 pb-10">
       <p class="font-heading text-sm font-semibold uppercase tracking-wider text-brand-red mb-3">Wir sind für Sie da</p>
-      <h1 class="font-heading text-4xl md:text-5xl font-semibold text-white">Kontakt</h1>
+      <h1 class="font-heading text-4xl md:text-5xl font-semibold text-white leading-tight">Kontakt</h1>
       <p class="mt-4 text-white/75 text-lg max-w-2xl mx-auto leading-relaxed">
         Haben Sie eine Frage zu Ihrem Fahrzeug oder möchten Sie einen Termin vereinbaren? Rufen Sie uns direkt an oder nutzen Sie das Kontaktformular. Auch allgemeine Fragen zu Ihrem Fahrzeug beantworten wir so schnell wie möglich.
       </p>
@@ -139,28 +144,48 @@
             </div>
             <div>
               <p class="font-heading text-xs font-semibold uppercase tracking-wide text-mist-600 mb-0.5">Öffnungszeiten</p>
-              <p class="text-ink-900 font-medium">Mo&ndash;Fr: 07:00&ndash;18:00 Uhr</p>
-              <p class="text-mist-600 text-sm">Sa: nach Vereinbarung</p>
+              <p class="text-ink-900 font-medium">Mo&ndash;Fr: 08:00&ndash;12:00 / 13:30&ndash;18:30</p>
+              <p class="text-mist-600 text-sm">Sa: 09:00&ndash;14:00 &nbsp;&bull;&nbsp; So: Geschlossen</p>
             </div>
           </li>
         </ul>
 
         <%# Direct call CTA %>
-        <a href="tel:+41318690000" class="btn-primary mb-8 w-full inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 font-heading text-sm font-semibold">
+        <a href="tel:+41318694333" class="btn-primary mb-8 w-full inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 font-heading text-sm font-semibold">
           <%= render "pages/icon", name: "phone", css_class: "w-4 h-4" %>
           Direkt anrufen
         </a>
 
-        <%# Map %>
-        <div class="map-wrapper overflow-hidden rounded-2xl shadow-sm h-64">
-          <iframe
-            src="https://www.google.com/maps?q=Bernstrasse+50,+3053+M%C3%BCnchenbuchsee&output=embed"
-            class="w-full h-full border-0"
+        <%# Google Maps – 2-Klick-Lösung (DSGVO-konform) %>
+        <div class="map-wrapper overflow-hidden rounded-2xl shadow-sm h-64 relative bg-mist-50 border border-mist-100" id="map-container">
+          <%# Shown by default – replaced after consent %>
+          <div id="map-consent" class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center px-4">
+            <%= render "pages/icon", name: "location", css_class: "w-8 h-8 text-brand-red" %>
+            <p class="text-xs text-mist-600 leading-snug max-w-[16rem]">
+              Karte von Google Maps.<br>Durch Laden stimmen Sie Googles
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="underline hover:text-brand-red">Datenschutzrichtlinie</a> zu.
+            </p>
+            <button onclick="ghLoadMap()" class="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-heading text-sm font-semibold">
+              Karte laden
+            </button>
+          </div>
+          <%# Hidden iframe – src injected on consent %>
+          <iframe id="map-iframe"
+            class="w-full h-full border-0 hidden"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             title="Standort Garage Hofwil AG, Bernstrasse 50, 3053 Münchenbuchsee">
           </iframe>
         </div>
+        <script>
+          function ghLoadMap() {
+            var iframe = document.getElementById('map-iframe');
+            var consent = document.getElementById('map-consent');
+            iframe.src = "https://www.google.com/maps?q=Bernstrasse+50,+3053+M%C3%BCnchenbuchsee&output=embed";
+            iframe.classList.remove('hidden');
+            consent.remove();
+          }
+        </script>
       </div>
 
     </div>

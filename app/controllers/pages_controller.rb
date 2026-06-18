@@ -3,6 +3,8 @@ class PagesController < ApplicationController
   def leistungen; end
   def kauf_verkauf; end
   def kontakt; end
+  def impressum; end
+  def datenschutz; end
 
   def contact_submit
     redirect_to kontakt_path, notice: "Vielen Dank! Ihre Nachricht wurde übermittelt. Wir melden uns so schnell wie möglich bei Ihnen."

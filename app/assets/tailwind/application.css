@@ -1,5 +1,42 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------- */
+/* Self-hosted fonts (DSGVO-konform – kein Google-CDN)               */
+/* ---------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/assets/inter-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/assets/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url('/assets/sora-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url('/assets/sora-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
@@ -480,16 +517,10 @@ details[open] .accordion-chevron {
 }
 
 /* ---------------------------------------------------------------- */
-/* Page hero (inner pages)                                             */
+/* Page hero – dark mode bg fallback (actual bg set by inline style)  */
 /* ---------------------------------------------------------------- */
 
-.page-hero {
-  background-color: var(--color-ink-900);
-  padding-top: 8rem;
-  padding-bottom: 5rem;
-  text-align: center;
-  color: #f3f5f6;
-}
+[data-theme="dark"] .page-hero { background-color: #0c0d0e; }
 
 /* ---------------------------------------------------------------- */
 /* AutoScout embed placeholder                                         */
@@ -634,8 +665,6 @@ details[open] .accordion-chevron {
 [data-theme="dark"] .text-mist-600  { color: #8a939d; }
 [data-theme="dark"] p               { color: inherit; }
 
-/* Page hero (inner pages) */
-[data-theme="dark"] .page-hero { background-color: #0c0d0e; }
 
 /* Value cards (light sections) */
 [data-theme="dark"] .value-card {
@@ -754,3 +783,46 @@ details[open] .accordion-chevron {
 
 [data-theme="dark"] .trust-card h3 { color: #e7eaed; }
 [data-theme="dark"] .trust-card p  { color: #8a939d; }
+
+/* ---------------------------------------------------------------- */
+/* Prose: Impressum / Datenschutz legal pages                         */
+/* ---------------------------------------------------------------- */
+
+.prose-legal { color: var(--color-mist-600); line-height: 1.75; font-size: 1rem; }
+.prose-legal h2 {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--color-ink-900);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-mist-100);
+}
+.prose-legal h3 {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-ink-900);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.prose-legal p  { margin-top: 0.75rem; }
+.prose-legal ul { margin-top: 0.75rem; margin-bottom: 0.75rem; padding-left: 1.5rem; list-style: disc; }
+.prose-legal li { margin-top: 0.35rem; }
+.prose-legal a  { color: var(--color-brand-red); text-decoration: underline; }
+.prose-legal a:hover { color: var(--color-brand-red-dark); }
+.prose-legal code {
+  font-size: 0.875em;
+  background: var(--color-mist-100);
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+.prose-legal strong { color: var(--color-ink-900); font-weight: 600; }
+
+[data-theme="dark"] .prose-legal        { color: #8a939d; }
+[data-theme="dark"] .prose-legal h2     { color: #e7eaed; border-color: rgba(255,255,255,0.07); }
+[data-theme="dark"] .prose-legal h3     { color: #e7eaed; }
+[data-theme="dark"] .prose-legal strong { color: #e7eaed; }
+[data-theme="dark"] .prose-legal code   { background: rgba(255,255,255,0.07); color: #e7eaed; }
