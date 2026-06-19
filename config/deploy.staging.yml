@@ -1,0 +1,56 @@
+service: garage_hofwil_staging
+
+image: noahbaumgartner2/garage_hofwil
+
+# Staging-Server
+# TBD: hier die Server-IP eintragen (kann derselbe Server wie Production sein)
+servers:
+  web:
+    - 179.237.87.63
+
+volumes:
+  - /var/lib/garage_hofwil_staging/storage:/rails/storage
+
+ssh:
+  user: ubuntu
+
+# TBD: hier die Staging-Domain eintragen (z.B. test.<domain>)
+proxy:
+  ssl: true
+  host: TBD_STAGING_DOMAIN
+
+registry:
+  server: ghcr.io
+  username: noahbaumgartner2
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+env:
+  clear:
+    DB_HOST: garage_hofwil_staging-db
+    DB_USERNAME: garage_hofwil_staging
+    DB_NAME: garage_hofwil_staging
+  secret:
+    - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD_STAGING
+
+accessories:
+  db:
+    image: postgres:16
+    # TBD: gleiche Server-IP wie oben eintragen
+    host: 179.237.87.63
+    port: "127.0.0.1:5433:5432"
+    env:
+      clear:
+        POSTGRES_USER: garage_hofwil_staging
+        POSTGRES_DB: garage_hofwil_staging
+      secret:
+        - POSTGRES_PASSWORD_STAGING
+    directories:
+      - data:/var/lib/postgresql/data
+
+builder:
+  arch: amd64
+
+aliases:
+  migrate: app exec --interactive --reuse 'bin/rails db:migrate'
