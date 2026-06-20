@@ -96,57 +96,69 @@
     <% end %>
 
     <%# Footer %>
-    <footer class="bg-ink-900 text-mist-50 px-6 pt-20 pb-10">
-      <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-3">
-        <div>
+    <footer class="bg-ink-900 text-mist-50 py-16">
+      <div class="max-w-[1200px] mx-auto px-6 lg:px-12 flex flex-col lg:flex-row lg:justify-between gap-12">
+
+        <div class="max-w-xs">
           <%= image_tag "logo/garage-hofwil-logo-weiss.png", alt: "Garage Hofwil AG", class: "h-10 w-auto" %>
-          <p class="mt-4 text-mist-100/70 max-w-sm text-sm leading-relaxed">
+          <p class="mt-4 text-mist-100/70 text-sm leading-relaxed">
             Ihr Partner für Service, Reparatur, Elektronik, Diagnose und MFK aller Fahrzeugmarken &ndash; seit über 25 Jahren in Münchenbuchsee.
           </p>
         </div>
 
-        <nav class="font-heading text-sm" aria-label="Footer Navigation">
-          <h3 class="text-mist-50 font-semibold mb-4">Navigation</h3>
-          <ul class="space-y-3 text-mist-100/70">
-            <li><a href="/"             class="hover:text-brand-red transition-colors">Startseite</a></li>
-            <li><a href="/leistungen"   class="hover:text-brand-red transition-colors">Leistungen</a></li>
-            <li><a href="/kauf-verkauf" class="hover:text-brand-red transition-colors">Kauf &amp; Verkauf</a></li>
-            <li><a href="/kontakt"      class="hover:text-brand-red transition-colors">Kontakt</a></li>
-          </ul>
-        </nav>
+        <div class="flex flex-wrap gap-12 lg:gap-16 font-heading text-sm">
+          <nav aria-label="Leistungen Navigation">
+            <h3 class="text-mist-50 font-semibold mb-4">Leistungen</h3>
+            <ul class="space-y-3 text-mist-100/70">
+              <li><a href="/leistungen" class="hover:text-brand-red transition-colors">Service &amp; Wartung</a></li>
+              <li><a href="/leistungen" class="hover:text-brand-red transition-colors">Reparatur</a></li>
+              <li><a href="/leistungen" class="hover:text-brand-red transition-colors">Elektronik &amp; Diagnose</a></li>
+              <li><a href="/leistungen" class="hover:text-brand-red transition-colors">MFK-Vorbereitung</a></li>
+              <li><a href="/leistungen" class="hover:text-brand-red transition-colors">Radwechsel &amp; Pneus</a></li>
+              <li><a href="/leistungen" class="hover:text-brand-red transition-colors">Klimaanlage</a></li>
+            </ul>
+          </nav>
 
-        <div class="font-heading text-sm">
-          <h3 class="text-mist-50 font-semibold mb-4">Kontakt &amp; Öffnungszeiten</h3>
-          <ul class="space-y-3 text-mist-100/70">
-            <li class="flex items-center gap-3">
-              <%= render "pages/icon", name: "phone",    css_class: "w-4 h-4 text-brand-red shrink-0" %>
-              <a href="tel:+41318694333" class="hover:text-brand-red transition-colors">+41 31 869 43 33</a>
-            </li>
-            <li class="flex items-center gap-3">
-              <%= render "pages/icon", name: "email",    css_class: "w-4 h-4 text-brand-red shrink-0" %>
-              <a href="mailto:info@garage-hofwil.ch" class="hover:text-brand-red transition-colors">info@garage-hofwil.ch</a>
-            </li>
-            <li class="flex items-center gap-3">
-              <%= render "pages/icon", name: "location", css_class: "w-4 h-4 text-brand-red shrink-0" %>
-              <span>Bernstrasse 50, 3053 Münchenbuchsee</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <%= render "pages/icon", name: "clock",    css_class: "w-4 h-4 text-brand-red shrink-0 mt-0.5" %>
-              <span>Mo&ndash;Fr: 08:00&ndash;12:00 / 13:30&ndash;18:30<br>Sa: 09:00&ndash;14:00 &nbsp;&bull;&nbsp; So: Geschlossen</span>
-            </li>
-          </ul>
+          <nav aria-label="Footer Navigation">
+            <h3 class="text-mist-50 font-semibold mb-4">Navigation</h3>
+            <ul class="space-y-3 text-mist-100/70">
+              <li><a href="/"             class="hover:text-brand-red transition-colors">Startseite</a></li>
+              <li><a href="/leistungen"   class="hover:text-brand-red transition-colors">Leistungen</a></li>
+              <li><a href="/kauf-verkauf" class="hover:text-brand-red transition-colors">Kauf &amp; Verkauf</a></li>
+              <li><a href="/kontakt"      class="hover:text-brand-red transition-colors">Kontakt</a></li>
+            </ul>
+          </nav>
+
+          <div>
+            <h3 class="text-mist-50 font-semibold mb-4">Kontakt &amp; Öffnungszeiten</h3>
+            <ul class="space-y-3 text-mist-100/70">
+              <li class="flex items-center gap-3">
+                <%= render "pages/icon", name: "phone",    css_class: "w-4 h-4 text-brand-red shrink-0" %>
+                <a href="tel:+41318694333" class="hover:text-brand-red transition-colors">+41 31 869 43 33</a>
+              </li>
+              <li class="flex items-center gap-3">
+                <%= render "pages/icon", name: "email",    css_class: "w-4 h-4 text-brand-red shrink-0" %>
+                <a href="mailto:info@garage-hofwil.ch" class="hover:text-brand-red transition-colors">info@garage-hofwil.ch</a>
+              </li>
+              <li class="flex items-center gap-3">
+                <%= render "pages/icon", name: "location", css_class: "w-4 h-4 text-brand-red shrink-0" %>
+                <span>Bernstrasse 50, 3053 Münchenbuchsee</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <%= render "pages/icon", name: "clock",    css_class: "w-4 h-4 text-brand-red shrink-0 mt-0.5" %>
+                <span>Mo&ndash;Fr: 08:00&ndash;12:00 / 13:30&ndash;18:30<br>Sa: 09:00&ndash;13:00 &nbsp;&bull;&nbsp; So: Geschlossen</span>
+              </li>
+            </ul>
+          </div>
         </div>
+
       </div>
 
-      <div class="max-w-[1200px] mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-mist-100/60">
+      <div class="max-w-[1200px] mx-auto px-6 lg:px-12 mt-12 pt-12 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-mist-100/60">
         <p>&copy; <%= Date.current.year %> Garage Hofwil AG. Alle Rechte vorbehalten.</p>
         <div class="flex items-center gap-6">
           <a href="/impressum"   class="hover:text-brand-red transition-colors">Impressum</a>
           <a href="/datenschutz" class="hover:text-brand-red transition-colors">Datenschutz</a>
-          <div class="flex items-center gap-4">
-            <a href="#" aria-label="Instagram" class="text-mist-100/70 hover:text-brand-red transition-colors"><%= render "pages/icon", name: "instagram", css_class: "w-5 h-5" %></a>
-            <a href="#" aria-label="LinkedIn"  class="text-mist-100/70 hover:text-brand-red transition-colors"><%= render "pages/icon", name: "linkedin",  css_class: "w-5 h-5" %></a>
-          </div>
         </div>
       </div>
     </footer>
