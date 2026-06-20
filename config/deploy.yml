@@ -59,3 +59,8 @@ builder:
 
 aliases:
   migrate: app exec --interactive --reuse 'bin/rails db:migrate'
+
+ssh:
+  user: ubuntu
+  keys:
+    - ~/.ssh/garage_hofwil_deploy
