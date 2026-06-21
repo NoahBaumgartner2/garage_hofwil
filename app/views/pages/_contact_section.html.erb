@@ -11,6 +11,7 @@
     "Radwechsel / Reifen",
     "KlimaService",
     "Kauf & Verkauf",
+    "Fahrzeug Bewertung",
     "Andere Services",
     "Anderes",
   ]
@@ -67,10 +68,6 @@
         </li>
       </ul>
 
-      <a href="https://wa.me/41767799249" target="_blank" rel="noopener" class="mt-8 inline-flex items-center gap-2.5 rounded-full px-6 py-3 font-heading text-sm font-semibold text-white transition-opacity hover:opacity-90" style="background-color: #25D366;">
-        <%= render "pages/icon", name: "whatsapp", css_class: "w-5 h-5" %>
-        WhatsApp schreiben
-      </a>
     </div>
 
     <%# Right: contact form in card %>
@@ -135,5 +132,14 @@
       </div>
     </div>
 
+  </div>
+
+  <%# WhatsApp CTA – full width centered %>
+  <div class="mt-12 flex flex-col items-center text-center">
+    <p class="text-mist-600 text-sm mb-3">Oder schreiben Sie uns ganz einfach über WhatsApp.</p>
+    <a href="https://wa.me/41767799249" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 rounded-full px-6 py-3 font-heading text-sm font-semibold text-white transition-opacity hover:opacity-90" style="background-color: #25D366;">
+      <%= render "pages/icon", name: "whatsapp", css_class: "w-5 h-5" %>
+      WhatsApp schreiben
+    </a>
   </div>
 </section>

@@ -1,7 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Controls the sticky navigation: background state on scroll and the
-// mobile menu toggle.
 export default class extends Controller {
   static targets = ["menu", "icon"]
 
@@ -20,12 +18,12 @@ export default class extends Controller {
   }
 
   toggle() {
-    this.menuTarget.classList.toggle("hidden")
-    this.element.classList.toggle("menu-open")
+    const isOpen = this.element.classList.toggle("menu-open")
+    this.menuTarget.classList.toggle("menu-visible", isOpen)
   }
 
   close() {
-    this.menuTarget.classList.add("hidden")
     this.element.classList.remove("menu-open")
+    this.menuTarget.classList.remove("menu-visible")
   }
 }
