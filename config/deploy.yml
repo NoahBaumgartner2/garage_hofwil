@@ -1,0 +1,63 @@
+# Name der App
+service: garage_hofwil
+
+# GitHub Container Registry
+image: noahbaumgartner2/garage_hofwil
+
+# Production-Server
+servers:
+  web:
+    - 179.237.87.63
+
+volumes:
+  - /var/lib/garage_hofwil/storage:/rails/storage
+
+# SSL (HTTPS) automatisch via Let's Encrypt
+proxy:
+  ssl: true
+  host: garage-hofwil.ch
+  app_port: 3000
+
+# Wo das gebaute Docker-Image gespeichert wird
+registry:
+  server: ghcr.io
+  username: noahbaumgartner2
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Umgebungsvariablen für die Rails App
+env:
+  clear:
+    DB_HOST: garage_hofwil-db # interner Name des DB-Accessory-Containers
+    DB_USERNAME: garage_hofwil
+    DB_NAME: garage_hofwil_production
+  secret:
+    - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
+
+# Zubehör: PostgreSQL Datenbank-Container
+accessories:
+  db:
+    image: postgres:16
+    host: 179.237.87.63
+    port: "127.0.0.1:5432:5432"
+    env:
+      clear:
+        POSTGRES_USER: garage_hofwil
+        POSTGRES_DB: garage_hofwil_production
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
+
+# Configure the image builder
+builder:
+  arch: amd64
+
+aliases:
+  migrate: app exec --interactive --reuse 'bin/rails db:migrate'
+
+ssh:
+  user: ubuntu
+  keys:
+    - ~/.ssh/garage_hofwil_deploy

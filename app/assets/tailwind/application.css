@@ -608,6 +608,11 @@ details[open] .accordion-chevron {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
+/* Service wheel icon labels: keep dark text on white pill in dark mode */
+[data-theme="dark"] .service-icon-card span {
+  color: #0c0d0e;
+}
+
 /* ---------------------------------------------------------------- */
 /* Reduced-motion                                                      */
 /* ---------------------------------------------------------------- */
