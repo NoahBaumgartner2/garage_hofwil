@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; color: #0c0d0e; background: #f3f5f6; margin: 0; padding: 0; }
+    .wrapper { max-width: 600px; margin: 32px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+    .header { background: #b83218; padding: 28px 32px; }
+    .header h1 { color: #ffffff; font-size: 20px; margin: 0; }
+    .header p { color: rgba(255,255,255,0.75); font-size: 13px; margin: 4px 0 0; }
+    .body { padding: 32px; }
+    .field { margin-bottom: 20px; }
+    .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #565d65; margin-bottom: 4px; }
+    .value { font-size: 15px; color: #0c0d0e; }
+    .divider { border: none; border-top: 1px solid #e7eaed; margin: 24px 0; }
+    .bemerkung { background: #f3f5f6; border-left: 3px solid #b83218; padding: 14px 16px; border-radius: 0 6px 6px 0; font-size: 14px; line-height: 1.6; white-space: pre-wrap; }
+    .footer { background: #f3f5f6; padding: 16px 32px; font-size: 12px; color: #565d65; text-align: center; }
+    a { color: #b83218; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <h1>Neue Kontaktanfrage</h1>
+      <p>Eingegangen über das Kontaktformular auf garage-hofwil.ch</p>
+    </div>
+    <div class="body">
+      <div class="field">
+        <div class="label">Name</div>
+        <div class="value"><%= @name %></div>
+      </div>
+      <div class="field">
+        <div class="label">E-Mail</div>
+        <div class="value"><a href="mailto:<%= @email %>"><%= @email %></a></div>
+      </div>
+      <div class="field">
+        <div class="label">Telefon</div>
+        <div class="value"><a href="tel:<%= @telefon %>"><%= @telefon %></a></div>
+      </div>
+      <div class="field">
+        <div class="label">Grund der Anfrage</div>
+        <div class="value"><%= @leistung %></div>
+      </div>
+      <hr class="divider">
+      <div class="field">
+        <div class="label">Bemerkung / Frage</div>
+        <div class="bemerkung"><%= @bemerkung %></div>
+      </div>
+    </div>
+    <div class="footer">
+      Garage Hofwil AG &bull; Bernstrasse 50, 3053 Münchenbuchsee &bull;
+      <a href="mailto:info@garage-hofwil.ch">info@garage-hofwil.ch</a>
+    </div>
+  </div>
+</body>
+</html>

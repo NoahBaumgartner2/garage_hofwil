@@ -547,20 +547,16 @@ details[open] .accordion-chevron {
 [data-theme="dark"] .page-hero { background-color: #0c0d0e; }
 
 /* ---------------------------------------------------------------- */
-/* AutoScout embed placeholder                                         */
+/* AutoScout24 HCI widget wrapper                                      */
 /* ---------------------------------------------------------------- */
 
-.autoscout-frame {
-  border: 2px dashed var(--color-mist-100);
-  border-radius: 1rem;
-  min-height: 28rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  padding: 3rem;
-  text-align: center;
+.hci-widget-wrapper {
+  background-color: #ffffff;
+  border: 1px solid var(--color-mist-100);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 4px 24px -8px rgba(12, 13, 14, 0.10);
+  min-height: 30rem;
 }
 
 /* ---------------------------------------------------------------- */
@@ -789,9 +785,10 @@ details[open] .accordion-chevron {
   border-color: var(--color-brand-red);
 }
 
-/* AutoScout placeholder */
-[data-theme="dark"] .autoscout-frame {
-  border-color: rgba(255,255,255,0.1);
+/* AutoScout24 HCI widget – dark mode */
+[data-theme="dark"] .hci-widget-wrapper {
+  background-color: #1a1f26;
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Footer stays dark in both modes */

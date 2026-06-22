@@ -163,6 +163,9 @@
       </div>
     </footer>
 
+    <%# Per-page scripts (e.g. AutoScout24 HCI widget) %>
+    <%= yield :page_scripts %>
+
     <%# Dark mode toggle script %>
     <script>
       function toggleTheme() {
